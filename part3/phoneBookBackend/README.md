@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## The link to the backend of the [PhoneBook](https://phonebook-backend-jm6a.onrender.com)
 
 ## TO **navigate** to the info section
@@ -18,3 +19,7 @@
 
      
     
+=======
+# The link to the backend of the [PhoneBook](https://phonebook-backend-jm6a.onrender.com)
+  to navigate to the info section just add /info to the  [https://serverexample](https://phonebook-backend-jm6a.onrender.com)
+>>>>>>> d8233073eb1db35972728e348e4f52691b5bcfd4

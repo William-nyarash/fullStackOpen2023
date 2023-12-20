@@ -1,51 +1,49 @@
+require('dotenv').config()
 const express = require('express')
+const app = express()
+const Person = require('./models/note')
 const morgan = require('morgan')
 const cors = require('cors')
-const app = express()
 
 app.use(express.json())
 app.use(express.static('dist'))
 app.use(cors())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
-let persons = [
-    { 
-      "id": 1,
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": 2,
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": 3,
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": 4,
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-]
 
 app.get('/',(request,response)=>{
+
     response.send('<h1>Hello world</h1>')
 })
 
-app.get('/api/persons',(require,response)=>{
-    response.json(persons)
+app.get('/api/persons', (request, response) => {
+  Person.find({}).then(notes => {
+    response.json(notes)
+  })
 })
+//change the code below this line and see if it works
+app.get('/api/persons',(req,res)=>{
+  Person.findOne(express.request.params.id).then(
+
+       response.status(200).send('<h1>welldone</h1>')
+  )
+})
+// change the above code and see if ti works as desired before moving forward to viewing the code in the browser
 app.get('/info',(request,response)=>{
-  const personLength = Number(persons.length)
-    let day = new Date()
-    response.send(`<p>Phonebook has info of ${personLength} people</p><br/><p>${day.toString()}</p>`)
+  const personLength = Person 
+                                              .find({}) 
+                                              .then( id =>{
+                                                          const IDlength = id.length
+                                                          let day = new Date()
+                                                          response  
+                                                          .send(`<p>Phonebook has info of ${IDlength} people</p><br/><p>${day.toString()}</p>`)
+  }
+   
+  )
 })
 app.get('/api/persons/:id',(request,response)=>{
-     const id = Number(request.params.id)
-      const person = persons.find(person=> person.id === id)
+     const id = Number (request.params.id)
+      const person = Person.find(person=> person.id === id)
      if(person){
 
         response.json(person)
@@ -53,49 +51,56 @@ app.get('/api/persons/:id',(request,response)=>{
         response.status(404).end()
      }
 })
-app.delete('/api/persons/:id',(request,response)=>{
-    const id = Number(request.params.id)
-    const person = persons.filter(person=>person.id !== id)
 
-    response.status(204).end()
+app.delete('/api/persons/:id',(request,response ,next)=>{
+    Person.findByIdAndDelete(request.params.id)   
+                .then( personDeleted =>{
+                  response.status(204).end()
+                })
+                .catch((error)=> next(error))
 })
-const newPersonId =()=>{
-   const randomId = Math.floor(Math.random() * 293)
-    const highestId = persons.length > 0
-    ? Math.max(...persons.map( p => p.id))
-    :0
-  return highestId + randomId
-}
+
+app.put('/api/persons/:id', (request, response, next) => {
+  const body = request.body
+
+  const person = {
+    name: body.name,
+    number: body.number,
+  }
+
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then(updatedNote => {
+      response.json(updatedNote)
+    })
+    .catch(error => next(error))
+})
+
+
 app.post('/api/persons',(request,response)=>{
     const body = request.body
-   persons
-
-    if(!body.name){
-        return response.status(404).json({
-            error: 'name missing'
-        })
-    } else if(!body.number){
-        return response.status(404).json(
-          {error: 'the number field is empty'}
-          )}
-   else if (persons.find((name)=>name.name === body.name)){
-      return response.status(404).json(
-        {error: `${body.name} already exists in phonebook`}
-      )
-    }
+    const result  = response.body
+          
+              if(!body.name){
+                return response.status(404).json({
+                    error: 'name missing'
+                })
+            } else if(!body.number){
+                return response.status(404).json(
+                  {error: 'the number field is empty'}
+                  )}
   
-    const person ={
+    const person =new Person ({
         name : body.name,
         number: body.number,
-        id: newPersonId()
-    }
 
-    persons = persons.concat(person)
-
-    response.json(person)
+    })
+    person.save().then(
+      newPersonInPhonebook =>{
+        response.json(newPersonInPhonebook)
+      })
 })
 morgan.token('body',(request,response)=>JSON.stringify(request.body))
 const PORT = process.env.PORT || 3001
 app.listen(PORT,()=>{
-    console.log(`server is running on port ${PORT}`)
+
 })

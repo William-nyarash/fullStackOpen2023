@@ -1,3 +1,6 @@
+import React from "react"
+import Header from "./components/Header"
+import Content from "./components/Content"
 const App = () => {
 const course ={
   name: 'Half Stack application development',
@@ -24,29 +27,29 @@ exercises: 10
     </div>
   )
 }
-const Header=({course})=>{
-  return(
-    <>
-      <h1>{course.name}</h1>
-    </>
-  )
-}
-const Content =({course})=>{
-  return(
-    <>
-       <Parts  name={course.parts[0].name} value={course.parts[0].exercises} />
-       <Parts  name={course.parts[1].name} value={course.parts[1].exercises} />
-       <Parts  name={course.parts[2].name} value={course.parts[2].exercises} />
-    </>
-  )
-}
-const Parts =({name,value})=>{
-  return(
-    <>
-    <p>{name}{value}</p>
-    </>
-  )
-}
+// const Header=({course})=>{
+//   return(
+//     <>
+//       <h1>{course.name}</h1>
+//     </>
+//   )
+// }
+// const Content =({course})=>{
+//   return(
+//     <>
+//        <Parts  name={course.parts[0].name} value={course.parts[0].exercises} />
+//        <Parts  name={course.parts[1].name} value={course.parts[1].exercises} />
+//        <Parts  name={course.parts[2].name} value={course.parts[2].exercises} />
+//     </>
+//   )
+// }
+// const Parts =({name,value})=>{
+//   return(
+//     <>
+//     <p>{name}{value}</p>
+//     </>
+//   )
+// }
 const Total =({course})=>{
   return(
     <>

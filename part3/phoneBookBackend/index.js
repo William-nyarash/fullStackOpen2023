@@ -21,14 +21,6 @@ app.get('/api/persons', (request, response) => {
     response.json(notes)
   })
 })
-//change the code below this line and see if it works
-app.get('/api/persons',(req,res)=>{
-  Person.findOne(express.request.params.id).then(
-
-       response.status(200).send('<h1>welldone</h1>')
-  )
-})
-// change the above code and see if ti works as desired before moving forward to viewing the code in the browser
 app.get('/info',(request,response)=>{
   const personLength = Person 
                                               .find({}) 

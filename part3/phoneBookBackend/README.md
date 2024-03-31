@@ -2,7 +2,10 @@
 ## The link to the backend of the [PhoneBook](https://phonebook-backend-jm6a.onrender.com)
 
 ## TO **navigate** to the info section
-    add the  /info to the parent url 
+        /info 
+
+
+copy and paste  the above codde / statement to the parent url 
 
 ## This ids the implimentation of the phoneBook backend
 

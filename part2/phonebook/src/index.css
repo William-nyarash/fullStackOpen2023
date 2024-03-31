@@ -1,5 +1,5 @@
  .addedPerson{
-    color:rgb(255, 238, 0);
+    color:rgb(45, 113, 56);
     font-size: 30px;
     font-style: italic;
     padding: 11px;
@@ -8,6 +8,7 @@
     align-items: center;
     background: lightgrey;
     border-style:solid ;
+    margin-bottom: 13px;
  }
 .errorMessage{
    color:rgb(255, 0, 0);
@@ -17,8 +18,9 @@
    display:flex;
    justify-content: center;
    align-items: center;
-   background: rgba(76, 103, 130, 0.296);
+   background: rgba(31, 45, 58, 0.296);
    border-style:solid ;
+   margin-bottom: 12px;
 }
 
 

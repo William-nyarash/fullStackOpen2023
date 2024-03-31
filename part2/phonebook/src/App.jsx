@@ -4,17 +4,18 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import personServices from './services/persons'
 import Notification from './components/Notification'
+import Warning from './components/Warning'
 import './index.css'
 
+
 const App = () => {
-  const [persons, setpersons] = useState([
-  ])
+  const [persons, setpersons] = useState([ ])
   const [newName,setNewName] = useState( '')
   const [newNumber,setNewNumber] = useState('') 
   const[showName,setShowName] = useState('')
   const[succes, setSucces] = useState(null)
   const[updatedNumber,setUpdatedNumber] = useState(null)
-  const[erroMessage,setErrorMessage] = useState(null)
+  const[errorMessage,setErrorMessage] = useState(null)
 
   const Hook =()=>{
   personServices
@@ -46,7 +47,7 @@ const App = () => {
                                         setUpdatedNumber(`${newName} number has been updated succesfully`)
                                         setTimeout(()=>{
                                           setUpdatedNumber(null)
-                                        }, 2000)
+                                        }, 5000)
                                       })
                                       .catch(()=>{
                                         setErrorMessage(`${newName} could not be found in the sever`)
@@ -69,7 +70,13 @@ const App = () => {
                  setSucces(`${newName} was succesfuly added to phonebook`)  
                  setTimeout(()=> {
                   setSucces(null)
-                 }, 3000)
+                 }, 6000)
+               })
+               .catch((error)=>{
+                setErrorMessage(error.response.data.error)
+                setTimeout(()=>{
+                  setErrorMessage(null)
+                },5000)
                })
              }
 
@@ -87,18 +94,18 @@ const handleNumberChange = (event) => {
     personServices
           .trash(id).then(removed =>{
               setpersons(persons.filter(persons => persons.name !== removed.name))
-             })
-                  
+             })          
             }
 }
+
   return (
     <div>
       <h2>Phonebook</h2>
       <Notification    
                 message={updatedNumber} 
                 />
-      <Notification    
-                errorMessage={erroMessage} 
+      <Warning
+                errorMessage={errorMessage} 
                 />
       <Notification 
              message={succes} 

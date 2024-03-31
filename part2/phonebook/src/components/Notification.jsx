@@ -1,13 +1,6 @@
-const Notification =({message,errorMessage})=>{
+const Notification =({message})=>{
  if(message == null){
     return null
- }
- else if (errorMessage == ''){
-    return(
-        <>
-          <div className="errorMessage">{errorMessage}</div>
-        </>
-    )
  }
     return(
         <div className="addedPerson">

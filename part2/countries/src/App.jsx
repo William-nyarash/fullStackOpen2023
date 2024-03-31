@@ -15,11 +15,8 @@ import Filter from'./components/Filter'
         useEffect(()=>{
           axios
                   .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
-                  .then( (response)=>
-                                  setCountry(response.data))
-                                  .catch(()=>{
-                    alert(" the said api is not working, retrying....");
-                  })
+                  .then( (response)=> setCountry(response.data))
+                  .catch(()=>{alert(" the said api is not working, retrying....");})
         },[]);   
         console.log("kenya",capitalIs)  
         const api_key = import.meta.env.VITE_SOME_KEY

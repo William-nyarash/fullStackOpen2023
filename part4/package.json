@@ -4,8 +4,9 @@
   "description": "blod backend application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "cross-env  NODE_ENV=production  node index.js",
+    "test": "cross-env  NODE_ENV=test node --test",
+    "dev": "cross-env  NODE_ENV=development nodemon index.js"
   },
   "author": "waren",
   "license": "MIT",
@@ -13,10 +14,13 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.3.4",
     "npm": "^10.8.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.0.0"
   }
 }

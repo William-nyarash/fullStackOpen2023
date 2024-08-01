@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --bg-clr : rgb(133, 158, 160);
+    --pri-txt-clr:rgb(56, 71, 105);
+    --txt-clr:rgb(219, 219, 219);
+
+    --txt-font:2rem;
+    --head-font:3rem;
+}

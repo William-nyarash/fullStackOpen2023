@@ -5,4 +5,6 @@ provide your prospective students and stakeholders with a clear course outline/ 
 
 course info seeks to do that and so much more
 
+we are planning on styling the application so watch out
+
 `watch out for more`

@@ -1,7 +1,5 @@
-// require('dotenv').config()
 const mongoose = require('mongoose')
-// const config = require('./controllers')
-// console.log(confi)
+
 const blogSchema = new mongoose.Schema({
     title: String,
     author: String,

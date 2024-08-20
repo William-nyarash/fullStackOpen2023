@@ -1,14 +1,14 @@
-const blogRouterRouter = require('express').Router()
+const blogRouter = require('express').Router()
 const { request, response } = require('express')
 const blog = require('../models/blogs')
 
-blogRouterRouter.get('/',(request,response)=>{
+blogRouter.get('/',(request,response)=>{
     blog.find({}).then(blogs=>{
         response.json(blogs)
     })
 })
 
-blogRouterRouter.get('/:id',(request,response,next)=>{
+blogRouter.get('/:id',(request,response,next)=>{
     blog.findById(request.params.id)
         .then(blog=>{
             if(blog){
@@ -22,7 +22,7 @@ blogRouterRouter.get('/:id',(request,response,next)=>{
         })
 })
 
-blogRouterRouter.post('/',(request,response,next)=>{
+blogRouter.post('/',(request,response,next)=>{
     const body = request.body
 
     const blogs = new blog({
@@ -37,7 +37,7 @@ blogRouterRouter.post('/',(request,response,next)=>{
     .catch(error=> next(error))
 })
 
-blogRouterRouter.delete('/:id',(request,response, next)=>{
+blogRouter.delete('/:id',(request,response, next)=>{
     blog.findByIdAndDelete(request.params.id)
     .then(()=>{
         response.status(204).end()
@@ -45,7 +45,7 @@ blogRouterRouter.delete('/:id',(request,response, next)=>{
     .catch(error =>next(error))
 })
 
-blogRouterRouter.put('/:id',(request,response,next)=>{
+blogRouter.put('/:id',(request,response,next)=>{
     const body= request.body
     const id = request.params.id
 
@@ -62,4 +62,4 @@ blogRouterRouter.put('/:id',(request,response,next)=>{
     .catch(error => next(error))
 })
 
-module.exports = blogRouterRouter
+module.exports = blogRouter

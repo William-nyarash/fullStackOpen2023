@@ -23,33 +23,38 @@ const favoriteBlog=(blogs)=>{
         return finalResult;
 }
 
-const mostBlogs= (blogs)=> {
-    const authors = {};
-    for (const blog of blogs) {
-      if (!authors[blog.author]) {
-        authors[blog.author] = 0;
-      }
-      authors[blog.author]++;
-    }
-    let maxAuthor = null;
-    let maxBlogs = 0;
-    for (const author in authors) {
-      if (authors[author] > maxBlogs) {
-        maxAuthor = author;
-        maxBlogs = authors[author];
-      }
-    }
-    const active = {
-        author: maxAuthor, 
-        blogs: maxBlogs 
-    }
-    return active;
-  }
+// Function to find the author with the most blogs
+const mostBlogs = (blogs) => {
+  const authorCount = blogs.reduce((acc, blog) => {
+    acc[blog.author] = (acc[blog.author] || 0) + 1;
+    return acc;
+  }, {});
+
+  const topAuthor = Object.entries(authorCount).reduce((prev, current) => {
+    return (prev[1] > current[1]) ? prev : current;
+  });
+
+  return { author: topAuthor[0], blogs: topAuthor[1] };
+};
+// Function to find the author with the most likes
+const mostLikes = (blogs) => {
+  const authorLikes = blogs.reduce((acc, blog) => {
+    acc[blog.author] = (acc[blog.author] || 0) + blog.likes;
+    return acc;
+  }, {});
+
+  const topAuthor = Object.entries(authorLikes).reduce((prev, current) => {
+    return (prev[1] > current[1]) ? prev : current;
+  });
+
+  return { author: topAuthor[0], likes: topAuthor[1] };
+};
   
 
 module.exports = {
     totalLikes,
     dummy,
     favoriteBlog,
-    mostBlogs 
+    mostBlogs,
+    mostLikes 
 }

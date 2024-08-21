@@ -5,6 +5,7 @@ const { mostBlogs } = require('../utils/list_helper')
 const listHelper = require('../utils/list_helper').dummy
 const totalLikes = require('../utils/list_helper').totalLikes
 const favoriteBlog = require('../utils/list_helper').favoriteBlog
+const mostLikes = require('../utils/list_helper').mostLikes
 
 
 test('dummy return one',()=>{
@@ -194,5 +195,72 @@ describe('total', () => {
 
       assert.notDeepStrictEqual(activeAuthor,blogs)
     })
+  })
+
+  // author with most likes
+  describe('mostLikes', () => {
+    test('should return the author with the most likes', () => {
+      const blogs = [
+        {
+          _id: "5a422a851b54a676234d17f7",
+          title: "React patterns",
+          author: "Michael Chan",
+          url: "https://reactpatterns.com/",
+          likes: 7,
+          __v: 0
+        },
+        {
+          _id: "5a422aa71b54a676234d17f8",
+          title: "Go To Statement Considered Harmful",
+          author: "Edsger W. Dijkstra",
+          url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+          likes: 5,
+          __v: 0
+        },
+        {
+          _id: "5a422b3a1b54a676234d17f9",
+          title: "Canonical string reduction",
+          author: "Edsger W. Dijkstra",
+          url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+          likes: 12,
+          __v: 0
+        },
+        {
+          _id: "5a422b891b54a676234d17fa",
+          title: "First class tests",
+          author: "Robert C. Martin",
+          url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+          likes: 10,
+          __v: 0
+        },
+        {
+          _id: "5a422ba71b54a676234d17fb",
+          title: "TDD harms architecture",
+          author: "Robert C. Martin",
+          url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+          likes: 30,
+          __v: 0
+        },
+        {
+          _id: "5a422bc61b54a676234d17fc",
+          title: "Type wars",
+          author: "Robert C. Martin",
+          url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+          likes: 2,
+          __v: 0
+        }  
+      ]
+      const result = mostLikes(blogs);
+      assert.deepStrictEqual(result, { author: "Robert C. Martin", likes: 42 });
+    });
+    test('should return the correct author when there is a tie', () => {
+      const result = mostLikes([
+        { title: "Blog 1", author: "Author A", likes: 5 },
+        { title: "Blog 2", author: "Author B", likes: 12 },
+        { title: "Blog 3", author: "Author A", likes: 12 },
+        { title: "Blog 4", author: "Author B", likes: 10 },
+      ]);
+      assert.ok(result.author === "Author A" || result.author === "Author B");
+    });
   })
   

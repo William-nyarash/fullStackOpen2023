@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import {useState} from 'react'
+import './app.css'
 const App=()=> {
    const [good ,setGood] = useState(0)
    const [bad ,setBad] = useState(0)
@@ -17,11 +19,12 @@ const App=()=> {
  }
   return (
     <>
-     <Header  text={"give feedback"}/>
+    <Header  text={"give feedback"}/>
      <Button handleClick={()=>setGood(good + 1)} value="good"/>
      <Button handleClick={()=>setBad(bad + 1)} value="bad"/>
      <Button handleClick={()=>setNeutral(neutral + 1)} value="neutral"/>
-     <Statistics  good={good} bad={bad} neutral={neutral} symbol={"%"}/>
+     <Statistics  good={good} bad={bad} neutral={neutral} symbol={"%"}/> 
+     <h2>helllo</h2>
     </>
   )
 }

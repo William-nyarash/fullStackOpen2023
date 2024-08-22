@@ -13,7 +13,7 @@ const App=()=> {
      <Button handleClick={()=>setBad(bad + 1)} value="bad"/>
      <Button handleClick={()=>setNeutral(neutral + 1)} value="neutral"/>
      <h1>statistic</h1>
-     <p>no feedback given</p>
+     <p className='no-fed'>no feedback given</p>
     </>
   )
  }
@@ -24,7 +24,6 @@ const App=()=> {
      <Button handleClick={()=>setBad(bad + 1)} value="bad"/>
      <Button handleClick={()=>setNeutral(neutral + 1)} value="neutral"/>
      <Statistics  good={good} bad={bad} neutral={neutral} symbol={"%"}/> 
-     <h2>helllo</h2>
     </>
   )
 }

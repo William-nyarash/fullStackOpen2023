@@ -1,7 +1,7 @@
 {
   "name": "blog_backend",
   "version": "1.0.0",
-  "description": "blod backend application",
+  "description": "blog backend application",
   "main": "index.js",
   "scripts": {
     "start": "cross-env  NODE_ENV=production  node index.js",

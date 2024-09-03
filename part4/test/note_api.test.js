@@ -28,6 +28,15 @@ test('there are two blogs',async()=>{
   assert.strictEqual(response.body.length,2)
 })
 
+// test for checking the notes content
+test('The first post is about Library Scaling Problem',async()=>{
+const response = await api.get('/api/blogs')
+
+const posts = response.body.map(post=> post.title)
+const actual = posts[1]
+assert(posts.includes(actual,'what is good and bad'))
+})
+
 after(async () => {
   // Close the database connection
   await mongoose.connection.close();

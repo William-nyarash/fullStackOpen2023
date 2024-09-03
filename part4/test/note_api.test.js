@@ -9,9 +9,32 @@ const supertest = require('supertest');
  
 // call the app as a superagent 
 const api = supertest(app);
+
+//  create initial blog posts
+const initialBlogpost =[
+  {
+    title :'Aspect-Oriented Programming is Quantification and Obliviousness',
+    author:'Filman Friedman',
+    url:'https://homepages.cwi.nl/~storm/teaching/reader/FilmanFriedman00.pdf',
+    likes:20
+  },
+  {
+    title :'the african silicon valley',
+    author:'waren djanabi',
+    url:'htpps://www.google.com',
+    likes:22
+  }
+]
 beforeEach(async () => {
   // Connect to the test database
   await mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+  await blog.deleteMany({}) 
+  //  add the new blogs
+  let blogObject = new blog(initialBlogpost[0])
+  await blogObject.save()
+  blogObject = new blog(initialBlogpost[1])
+  await blogObject.save()
 });
 
 
@@ -34,7 +57,7 @@ const response = await api.get('/api/blogs')
 
 const posts = response.body.map(post=> post.title)
 const actual = posts[1]
-assert(posts.includes(actual,'what is good and bad'))
+assert(posts.includes(actual,'the african silicon valley'))
 })
 
 after(async () => {

@@ -39,7 +39,7 @@ beforeEach(async () => {
 
 
 
-test.only('notes are returned as json', async() => {
+test('notes are returned as json', async() => {
      await api.get('/api/blogs')
     .expect(200)
     .expect('Content-Type',/application\/json/);

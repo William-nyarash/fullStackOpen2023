@@ -1,5 +1,6 @@
 const request = require('supertest');
 const { test, after, beforeEach } = require('node:test')
+const assert = require('node:assert')
 const app = require('../app'); 
 const blog = require('../models/blogs');
 const mongoose = require('mongoose');
@@ -21,6 +22,11 @@ test.only('notes are returned as json', async() => {
     .expect('Content-Type',/application\/json/);
 
 });
+// check the number of notes
+test('there are two blogs',async()=>{
+  const response = await api.get('/api/blogs');
+  assert.strictEqual(response.body.length,2)
+})
 
 after(async () => {
   // Close the database connection

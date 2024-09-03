@@ -48,8 +48,9 @@ test.only('notes are returned as json', async() => {
 // check the number of notes
 test('there are two blogs',async()=>{
   const response = await api.get('/api/blogs');
+  // check the blogs dynamically
   assert.strictEqual(response.body.length,initialBlogpost.length)
-})
+});
 
 // test for checking the notes content
 test('The first post is about Library Scaling Problem',async ()=>{
@@ -57,7 +58,7 @@ const response = await api.get('/api/blogs')
 
 const posts = response.body.map(post=> post.title)
 assert(posts.includes('the african silicon valley'))
-})
+});
 
 after(async () => {
   // Close the database connection

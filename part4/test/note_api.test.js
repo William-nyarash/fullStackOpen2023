@@ -48,16 +48,15 @@ test.only('notes are returned as json', async() => {
 // check the number of notes
 test('there are two blogs',async()=>{
   const response = await api.get('/api/blogs');
-  assert.strictEqual(response.body.length,2)
+  assert.strictEqual(response.body.length,initialBlogpost.length)
 })
 
 // test for checking the notes content
-test('The first post is about Library Scaling Problem',async()=>{
+test('The first post is about Library Scaling Problem',async ()=>{
 const response = await api.get('/api/blogs')
 
 const posts = response.body.map(post=> post.title)
-const actual = posts[1]
-assert(posts.includes(actual,'the african silicon valley'))
+assert(posts.includes('the african silicon valley'))
 })
 
 after(async () => {

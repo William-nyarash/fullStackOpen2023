@@ -19,7 +19,7 @@ import Filter from'./components/Filter'
                   .catch(()=>{alert(" the said api is not working, retrying....");})
         },[]);   
         console.log("kenya",capitalIs)  
-        const api_key = import.meta.env.VITE_SOME_KEY
+        const api_key = process.env.
      if(capitalCity){useEffect(()=>{
         axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${capitalCity}&units=imperial&APPID=${api_key}`)
                 .then((result)=>setWeather(result.data))

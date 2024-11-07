@@ -1,6 +1,8 @@
 const blogRouter = require('express').Router()
 const mongoose = require('mongoose')
 const Blog = require('../models/blogs')
+const { request, response } = require('../app')
+const blogs = require('../models/blogs')
 
 blogRouter.get('/',async(request,response)=>{
     const blogs = await Blog.find({})
@@ -21,6 +23,11 @@ blogRouter.get('/:id',async(request,response)=>{
   } catch (error) {
       response.status(500).send({ error: 'Server error' });
   }
+})
+blogRouter.put('/:id',async(request,response)=>{
+  const {title, author,like,url} = request.params
+
+  blogs.findByIdAndUpdate()
 })
 
 blogRouter.post('/',async(request,response,next)=>{

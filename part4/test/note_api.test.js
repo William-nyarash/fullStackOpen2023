@@ -3,6 +3,8 @@ const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
 const app = require('../app'); 
 const blog = require('../models/blogs');
+const bcrypt = require('bcrypt')
+const User = require('../models/user')
 const mongoose = require('mongoose');
 const config = require('../utils/config');
 const supertest = require('supertest');
@@ -12,7 +14,6 @@ const helper = require('./blog_helper')
 const api = supertest(app);
 
 const Blog = require('../models/blogs');
-const { result, takeWhile } = require('lodash');
 const { title } = require('node:process');
 
 // //  create initial blog posts
@@ -30,6 +31,62 @@ const { title } = require('node:process');
 //     likes:22
 //   }
 // ]
+
+
+describe('When there is initially one user in the database', ()=>{
+        beforeEach(async ()=>{
+            await User.deleteMany({})
+
+            hashedPassword = await  bcrypt.hash( 'secrete' ,10)
+            const user = new User({ username:'admin', password: hashedPassword})
+            await user.save()
+        })
+        test('user is created successfully ',async ()=>{
+          const initialUser = await helper.userInDb()
+
+          const newUser = {
+            username: 'jayalis',
+            name:'jayalo otis',
+            password:'salainen',
+          }
+          console.log('creating new user',newUser)
+          await api
+          .post('/api/users')
+          .send(newUser)
+          .expect(201)
+          .expect('Content-Type', /application\/json/)
+    
+        const usersAtEnd = await helper.userInDb()
+        assert.strictEqual(usersAtEnd.length, initialUser.length + 1)
+    
+        const usernames = usersAtEnd.map(u => u.username)
+        assert(usernames.includes(newUser.username))
+      })
+    
+        //  pick it up from here you are to test the functionallity of concurent username
+      test('if the username is not unique it should return an appropriate error message', async () =>{
+
+        const userAtStart = await helper.userInDb()
+
+        const duplicateUsername = {
+          username:"admin",
+          name:"waren otoyo",
+          password:"ItsBeen@while"
+        }
+
+      const result =  await  api
+        .post('/api/users')
+        .send(duplicateUsername)
+        .expect(400)
+        .expect('Content-Type', /application\/json/)
+
+        const usersAtEnd = await helper.userInDb()
+
+        assert(result.body.error.includes('expected `username` to be unique'))
+
+        assert.strictEqual(userAtStart.length, usersAtEnd.length)
+      })
+    })
 
 describe("When there is initial two blogs saved", ()=>{
    beforeEach(async ()=>{

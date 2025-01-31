@@ -1,11 +1,12 @@
 const blogRouter = require('express').Router()
 const mongoose = require('mongoose')
 const Blog = require('../models/blogs')
+const User = require('../models/user')
 const { request, response } = require('../app')
 const blogs = require('../models/blogs')
 
 blogRouter.get('/',async(request,response)=>{
-    const blogs = await Blog.find({})
+    const blogs = await Blog.find({}).populate('user',{username:1, name: 1})
         response.json(blogs)
 })
 
@@ -32,12 +33,16 @@ blogRouter.put('/:id',async(request,response)=>{
 
 blogRouter.post('/',async(request,response,next)=>{
         const {title, author,url} = request.body
+        const  userId = request.body.userId
     if (!title || !url) {
         return response.status(400).json({ error: 'Title and url are required' });
       }
-    const blogs = new Blog({title, author, url})
+    const user = await User.findById(userId)
+
+    const blogs = new Blog({title, author, url, user: user.id})
     const savedBlog = await blogs.save()
-    blogs.save()
+    user.blogs = user.blogs.concat(savedBlog._id)
+    await user.save()
     response.status(201).json(savedBlog)
 
 

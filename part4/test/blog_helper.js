@@ -22,17 +22,15 @@ const initialBlogpost =[
       url: "http://dummy_data/nwe9",
       likes: 0,
     });
-    await blog.save(); // Save the blog to generate an ID
+    await blog.save(); 
   
     const id = blog._id.toString();
     
-    // Delete using the _id field as query
     await Blogs.deleteOne({ _id: id }); 
   
-    return id; // Return the ID which should now be non-existent
+    return id; 
   };
    
-
 const blogsInDb =async ()=>{
  const blogs = await Blogs.find({})
  return blogs.map(blog => blog.toJSON())

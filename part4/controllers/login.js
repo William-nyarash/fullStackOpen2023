@@ -8,7 +8,6 @@ loginRouter.post('/',async (request, response) =>{
     const {username, password} = request.body
 
     const user = await User.findOne({username})
-    console.log("The user is ", user);
 
     if (!user) {
         return response.status(401).json({
@@ -16,7 +15,6 @@ loginRouter.post('/',async (request, response) =>{
         })
     }
 
-    // Compare password with the hashed password stored in the database
     const correctPassword = await bcrypt.compare(password, user.passwordH) // Adjust if your field is different
 
     if (!correctPassword) {
@@ -29,7 +27,7 @@ loginRouter.post('/',async (request, response) =>{
         username: user.username,
         id: user._id,
     }
-    const token = jwt.sign( sessionToken, process.env.SECRET)
+    const token = jwt.sign( sessionToken, process.env.SECRET,{expiresIn: 60*60})
     response
         .status(200)
         .send({token, username: user.username, name: user.name})

@@ -8,12 +8,12 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`;
 };
 
-const getAll = () => {
+const getAll = async() => {
   const config = {
     headers: { Authorization: token }
   };
-  const request = axios.get(baseUrl, config);  
-  return request.then(response => response.data);
+  const response = await axios.get(baseUrl, config);  
+  return response.data
 };
 
 const create = async newObject => {
@@ -25,9 +25,13 @@ const create = async newObject => {
   return response.data
 }
 
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl }/${id}`, newObject)
-  return request.then(response => response.data)
+const update = async (id, newObject) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const request = await axios.put(`${ baseUrl }/${id}`, newObject, config);
+  return request.data;
 }
+
 
 export default { getAll, create, update, setToken }

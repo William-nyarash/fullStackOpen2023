@@ -5,7 +5,7 @@ const CreateBlog =({
   handleAuthorChange,
   handleBlogCreation,
   handleTitleChange,
-  handleUrlChange
+  handleUrlChange,
 })=>{
     return(
         <div>

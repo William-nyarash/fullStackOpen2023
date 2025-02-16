@@ -15,6 +15,7 @@ const App = () => {
   const [title,setTitle] =useState(' ')
   const[author, setAuthor] = useState('')
   const [url,setUrl] = useState('')
+  const[likes,setLikes] = useState(0)
   const [successMessage,setSuccessMessage] = useState(null)
 
 
@@ -99,6 +100,10 @@ const App = () => {
   const handleTitleChange=(event)=>{
     setTitle(event.target.value)
   }
+  const handleLikes=(event)=>{
+    setLikes(0)
+  }
+  console.log("the blogs likes are",likes)
 
   return (
     <div>
@@ -144,7 +149,10 @@ const App = () => {
                 />
           </Togglabe>
           {blogs.map(blog => 
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog}
+            handleLikes={handleLikes}
+            likes={likes}
+            />
           )}
         </div>
       )}

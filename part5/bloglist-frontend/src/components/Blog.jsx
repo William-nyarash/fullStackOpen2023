@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Blog = ({ blog, handleLikes, likes }) => {
-  const [details, setDetails] = useState(false); // Initially, details are hidden
+  const [details, setDetails] = useState(false); 
 
   const blogStyle = {
     paddingTop: 10,
@@ -12,7 +12,7 @@ const Blog = ({ blog, handleLikes, likes }) => {
   };
 
   const toggleDetails = () => {
-    setDetails(!details); // Toggle between true and false
+    setDetails(!details); 
   };
 
   return (

@@ -103,7 +103,8 @@ const App = () => {
   const handleLikes=(event)=>{
     setLikes(0)
   }
-  console.log("the blogs likes are",likes)
+  // continue from adding likes and deleting blog
+  
 
   return (
     <div>

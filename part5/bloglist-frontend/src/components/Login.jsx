@@ -20,13 +20,13 @@ const Login =({ submitLoginForm }) => {
         <h2>log in to application</h2>
         <div>
             Username
-          <input type="text" value={username} onChange={({ target }) => setUsername(target.value)} />
+          <input type='text' value={username} onChange={({ target }) => setUsername(target.value)} />
         </div>
         <div>
             Password
-          <input type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
+          <input type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
         </div>
-        <button type="submit">Login</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   )

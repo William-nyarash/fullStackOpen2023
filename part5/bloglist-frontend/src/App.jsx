@@ -1,34 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect ,useRef } from 'react'
 import Blog from './components/Blog'
 import loginService from './services/login'
 import blogService from './services/blogs'
 import CreateBlog from './components/CreateBlog'
 import Togglable from './components/Togglable'
+import Login from './components/Login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState(null)
-
+  const blogForm = useRef()
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const blogs = await blogService.getAll();
-        const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
-        setBlogs(sortedBlogs);
+        const blogs = await blogService.getAll()
+        const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
+        setBlogs(sortedBlogs)
       } catch (error) {
-        setErrorMessage('Failed to fetch blogs');
+        setErrorMessage('Failed to fetch blogs')
       }
-    };
-  
-    if (user) {
-      fetchBlogs();
     }
-  }, [user]);
-  
+    if (user) {
+      fetchBlogs()
+    }
+  }, [user])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
@@ -48,15 +45,12 @@ const App = () => {
     }
   }, [successMessage])
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
+  const submitLoginForm = async (loginData) => {
     try {
-      const loggedInUser = await loginService.login({ username, password })
+      const loggedInUser = await loginService.login(loginData)
       window.localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
       blogService.setToken(loggedInUser.token)
       setUser(loggedInUser)
-      setUsername('')
-      setPassword('')
       setErrorMessage('')
     } catch (error) {
       setErrorMessage('Invalid username or password')
@@ -82,18 +76,17 @@ const App = () => {
   }
   const deleteBlog = async (id) => {
     try {
-      await blogService.remove(id);
-      setBlogs(blogs.filter(blog => blog.id !== id));
-      setSuccessMessage('Blog deleted successfully');
+      await blogService.remove(id)
+      setBlogs(blogs.filter(blog => blog.id !== id))
+      setSuccessMessage('Blog deleted successfully')
     } catch (error) {
-      setErrorMessage('Failed to delete blog');
+      setErrorMessage('Failed to delete blog')
     }
-  };
-  
-  const updateLikes = async(id, updatedBlog)=>{
+  }
+  const updateLikes = async(id, updatedBlog) => {
     try{
       const newBlog = await blogService.update(id,updatedBlog)
-      setBlogs(blogs.map((blog)=> blog.id === id ? newBlog :blog))
+      setBlogs(blogs.map((blog) => blog.id === id ? newBlog :blog))
     }catch(error){
       setErrorMessage(` Failed to update likes: ${error.message}`)
     }
@@ -107,22 +100,13 @@ const App = () => {
       {successMessage && <p style={{ borderRadius: '12px', color: 'green', border: '4px solid green', padding: '12px' }}>{successMessage}</p>}
 
       {!user ? (
-        <form onSubmit={handleLogin}>
-          <h2>log in to application</h2>
-          <div>
-            Username
-            <input type="text" value={username} onChange={({ target }) => setUsername(target.value)} />
-          </div>
-          <div>
-            Password
-            <input type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
-          </div>
-          <button type="submit">Login</button>
-        </form>
+        <Togglable buttonLabel='login'>
+          <Login  submitLoginForm={submitLoginForm}/>
+        </Togglable>
       ) : (
         <div>
           <h2>{user.name} logged in <button type="button" onClick={handleLogout}>Logout</button></h2>
-          <Togglable buttonLabel="new blog">
+          <Togglable buttonLabel="new blog" ref={blogForm}>
             <CreateBlog createBlog={createBlog} />
           </Togglable>
           {blogs.map(blog => (

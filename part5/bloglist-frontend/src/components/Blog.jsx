@@ -1,28 +1,28 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const Blog = ({ blog, updateLikes,deleteBlog }) => {
-  const [details, setDetails] = useState(false);
+  const [details, setDetails] = useState(false)
 
   const toggleDetails = () => {
-    setDetails(!details);
-  };
- const handleDelete =async()=>{
-  if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
-    try {
-      await deleteBlog(blog.id);
-    } catch (error) {
-      console.error('Failed to delete blog:', error.message);
+    setDetails(!details)
+  }
+  const handleDelete =async() =>  {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      try {
+        await deleteBlog(blog.id)
+      } catch (error) {
+        console.error('Failed to delete blog:', error.message)
+      }
     }
   }
-};
 
   const handleLike = async () => {
     const updatedBlog = {
       ...blog,
       likes: blog.likes + 1,
-    };
-    await updateLikes(blog.id, updatedBlog);
-  };
+    }
+    await updateLikes(blog.id, updatedBlog)
+  }
   return (
     <div style={{ padding: '10px', border: '1px solid black', marginBottom: '5px' }}>
       <div>
@@ -41,7 +41,7 @@ const Blog = ({ blog, updateLikes,deleteBlog }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog

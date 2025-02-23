@@ -24,10 +24,10 @@ const Blog = ({ blog, updateLikes,deleteBlog }) => {
     await updateLikes(blog.id, updatedBlog)
   }
   return (
-    <div style={{ padding: '10px', border: '1px solid black', marginBottom: '5px' }}>
+    <div  className='blog' style={{ padding: '10px', border: '1px solid black', marginBottom: '5px' }}>
       <div>
         {blog.title} by {blog.author}
-        <button onClick={toggleDetails}>{details ? 'Hide' : 'View'}</button>
+        <button onClick={toggleDetails}> {details ? 'Hide' : 'View' }</button>
       </div>
       {details && (
         <div>

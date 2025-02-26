@@ -21,18 +21,12 @@ const CreateBlog = ({ createBlog }) => {
     <div>
       <h2>create new</h2>
       <form onSubmit={addBlog}>
-        <div>
-          title:
-          <input type="text" value={title} onChange={handleChange(setTitle)} />
-        </div>
-        <div>
-          author:
-          <input type="text" value={author} onChange={handleChange(setAuthor)} />
-        </div>
-        <div>
-          url:
-          <input type="text" value={url} onChange={handleChange(setUrl)} />
-        </div>
+        <label htmlFor='title'>Title</label>
+        <input id='title' type="text" value={title} onChange={handleChange(setTitle)} />
+        <label htmlFor='author'>Author</label>
+        <input id='author' type="text" value={author} onChange={handleChange(setAuthor)} />
+        <label htmlFor='url'>Url</label>
+        <input id='url' type="text" value={url} onChange={handleChange(setUrl)} />
         <button type="submit">create</button>
       </form>
     </div>

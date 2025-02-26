@@ -83,10 +83,10 @@ const App = () => {
       setErrorMessage('Failed to delete blog')
     }
   }
-  const updateLikes = async(id, updatedBlog) => {
+  const updateLikes = async (id, updatedBlog) => {
     try{
-      const newBlog = await blogService.update(id,updatedBlog)
-      setBlogs(blogs.map((blog) => blog.id === id ? newBlog :blog))
+      const newBlog = await blogService.update(id, updatedBlog)
+      setBlogs(blogs.map((blog) => blog.id === id ? newBlog : blog))
     }catch(error){
       setErrorMessage(` Failed to update likes: ${error.message}`)
     }
@@ -97,7 +97,7 @@ const App = () => {
       <h2>Blogs</h2>
 
       {errorMessage && <p style={{ borderRadius: '12px', color: 'red', border: '2px solid red', padding: '12px' }}>{errorMessage}</p>}
-      {successMessage && <p style={{ borderRadius: '12px', color: 'green', border: '4px solid green', padding: '12px' }}>{successMessage}</p>}
+      {successMessage && <p className='new' style={{ borderRadius: '12px', color: 'green', border: '4px solid green', padding: '12px' }}>{successMessage}</p>}
 
       {!user ? (
         <Togglable buttonLabel='login'>
@@ -110,7 +110,7 @@ const App = () => {
             <CreateBlog createBlog={createBlog} />
           </Togglable>
           {blogs.map(blog => (
-            <Blog key={blog.id} blog={blog} deleteBlog={deleteBlog}   updateLikes={updateLikes} />
+            <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog} />
           ))}
         </div>
       )}

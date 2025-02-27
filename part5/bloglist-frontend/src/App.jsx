@@ -5,6 +5,7 @@ import blogService from './services/blogs'
 import CreateBlog from './components/CreateBlog'
 import Togglable from './components/Togglable'
 import Login from './components/Login'
+import axios from 'axios'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -35,7 +36,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
   useEffect(() => {
     if (successMessage) {
       const timer = setTimeout(() => {

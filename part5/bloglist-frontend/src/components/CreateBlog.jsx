@@ -22,11 +22,11 @@ const CreateBlog = ({ createBlog }) => {
       <h2>create new</h2>
       <form onSubmit={addBlog}>
         <label htmlFor='title'>Title</label>
-        <input   data-testid='title' id='title' type="text" value={title} onChange={handleChange(setTitle)} />
+        <input id='title' type="text" value={title} onChange={handleChange(setTitle)} />
         <label htmlFor='author'>Author</label>
-        <input data-testid='author' id='author' type="text" value={author} onChange={handleChange(setAuthor)} />
+        <input id='author' type="text" value={author} onChange={handleChange(setAuthor)} />
         <label htmlFor='url'>Url</label>
-        <input data-testid='url' id='url' type="text" value={url} onChange={handleChange(setUrl)} />
+        <input id='url' type="text" value={url} onChange={handleChange(setUrl)} />
         <button type="submit">create</button>
       </form>
     </div>

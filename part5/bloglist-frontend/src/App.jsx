@@ -97,7 +97,7 @@ const App = () => {
       <h2>Blogs</h2>
 
       {errorMessage && <p style={{ borderRadius: '12px', color: 'red', border: '2px solid red', padding: '12px' }}>{errorMessage}</p>}
-      {successMessage && <p className='new' style={{ borderRadius: '12px', color: 'green', border: '4px solid green', padding: '12px' }}>{successMessage}</p>}
+      {successMessage && <p  style={{ borderRadius: '12px', color: 'green', border: '4px solid green', padding: '12px' }}>{successMessage}</p>}
 
       {!user ? (
         <Togglable buttonLabel='login'>

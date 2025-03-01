@@ -19,14 +19,14 @@ const CreateBlog = ({ createBlog }) => {
 
   return (
     <div>
-      <h2>create new</h2>
+      <h2 data-testid='new_blog'>create new</h2>
       <form onSubmit={addBlog}>
         <label htmlFor='title'>Title</label>
-        <input id='title' type="text" value={title} onChange={handleChange(setTitle)} />
+        <input data-testid='title' id='title' type="text" value={title} onChange={handleChange(setTitle)} />
         <label htmlFor='author'>Author</label>
-        <input id='author' type="text" value={author} onChange={handleChange(setAuthor)} />
+        <input  data-testid='author' id='author' type="text" value={author} onChange={handleChange(setAuthor)} />
         <label htmlFor='url'>Url</label>
-        <input id='url' type="text" value={url} onChange={handleChange(setUrl)} />
+        <input data-testid='url' id='url' type="text" value={url} onChange={handleChange(setUrl)} />
         <button type="submit">create</button>
       </form>
     </div>

@@ -25,7 +25,7 @@ const Blog = ({ blog, updateLikes,deleteBlog }) => {
   }
   return (
     <div  className='blog' style={{ padding: '10px', border: '1px solid black', marginBottom: '5px' }}>
-      <div>
+      <div data-testid='blog-title'>
         {blog.title} by {blog.author}
         <button onClick={toggleDetails}> {details ? 'Hide' : 'View' }</button>
       </div>

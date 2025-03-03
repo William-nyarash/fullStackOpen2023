@@ -32,6 +32,7 @@ export const addAnecdote = (content) => {
     payload: { content, id: getId(), votes: 0 }
   }
 }
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'vote':
@@ -39,10 +40,11 @@ const reducer = (state = initialState, action) => {
         anecdote.id === action.payload.id
           ? { ...anecdote, votes: anecdote.votes + 1 }
           : anecdote
-      )
+      ).sort((a, b) => b.votes - a.votes)
 
     case 'add_anecdote':
-      return [...state, action.payload]
+      return [...state, action.payload].sort((a, b) => b.votes - a.votes)
+
     default:
       return state
   }

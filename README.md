@@ -25,3 +25,5 @@
 
 ## `countries`
 
+## working with `redux`
+   in part 6 I've gained understanding on redux applications 

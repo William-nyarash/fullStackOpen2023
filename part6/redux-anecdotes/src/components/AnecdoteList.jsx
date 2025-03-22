@@ -11,10 +11,8 @@ const selectFilteredAnecdotes = createSelector(
     return anecdotes.filter(anecdote => anecdote.content.includes(filter));
   }
 );
-
 const AnecdoteList = () => {
   const anecdotes = useSelector(selectFilteredAnecdotes); 
-
   return (
     <div>
       {anecdotes.map(anecdote => (

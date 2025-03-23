@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { notificationTimeOut } from './noticicationReducer'
 
 const anecdotesAtStart = [
   'If it hurts, do it more often',
@@ -11,13 +12,11 @@ const anecdotesAtStart = [
 
 const getId = () => (100000 * Math.random()).toFixed(0)
 
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}
+const asObject = (anecdote) => ({
+  content: anecdote,
+  id: getId(),
+  votes: 0
+})
 
 const initialState = anecdotesAtStart.map(asObject)
 
@@ -26,19 +25,29 @@ const anecdoteSlice = createSlice({
   initialState,
   reducers: {
     vote(state, action) {
-      const id = action.payload
-      const anecdote = state.find(a => a.id === id)
-      if (anecdote) {
-        anecdote.votes += 1
-      }
-      state.sort((a, b) => b.votes - a.votes) 
+      const id = action.payload;
+      return state
+        .map(anecdote =>
+          anecdote.id === id
+            ? { ...anecdote, votes: anecdote.votes + 1 }
+            : anecdote
+        )
+        .sort((a, b) => b.votes - a.votes);
     },
     addAnecdote(state, action) {
-      const content = action.payload
-      state.push({ content, id: getId(), votes: 0 })
+      const content = action.payload;
+      state.push({ content, id: getId(), votes: 0 });
     }
   }
-})
+});
 
-export const { vote, addAnecdote } = anecdoteSlice.actions
-export default anecdoteSlice.reducer
+export const { vote, addAnecdote } = anecdoteSlice.actions;
+
+export const voteForAnecdote = (id, content) => {
+  return (dispatch) => {
+    dispatch(vote(id));
+    dispatch(notificationTimeOut(`You voted for "${content}"`)); 
+  };
+};
+
+export default anecdoteSlice.reducer;

@@ -8,7 +8,7 @@ const AnecdoteForm =()=>{
     event.preventDefault()
     const anecdote = event.target.anecdote.value
     if(anecdote){
-      dispatch(addAnecdote(anecdote))
+        dispatch(addAnecdote(anecdote))
       event.target.anecdote.value = ' '
     }
   }

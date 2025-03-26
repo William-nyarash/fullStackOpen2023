@@ -1,28 +1,30 @@
 import { useDispatch } from "react-redux";
-import { addAnecdote } from "../reducers/anecdoteReducer";
-import anecdotes from "../services/anecdotes";
+import { createAnecdote } from "../reducers/anecdoteReducer";
+import { setNotification } from "../reducers/noticicationReducer";
 
-const AnecdoteForm =()=>{
-  const dispatch = useDispatch()
 
-  const createAnecdote = async (event) =>{
-    event.preventDefault()
-    const anecdote = event.target.anecdote.value
-    if(anecdote){
-      const content = event.target.note.value
-      event.target.anecdote.value = ' '
-      const newAnecdote = await anecdotes.createNew(content)
-      dispatch(addAnecdote(newAnecdote))
-    }
-  }
-  return(
+const AnecdoteForm = () => {
+  const dispatch = useDispatch();
+
+  const createAnecdotes = async (event) => {
+    event.preventDefault();
+    const content = event.target.anecdote.value
+      event.target.anecdote.value = ""
+      dispatch(createAnecdote(content))
+      dispatch(setNotification(`New aecdote added : ${content}`))
+  };
+
+  return (
     <div>
       <h2>Create new</h2>
-      <form onSubmit={createAnecdote}>
-        <div><input type="text" name="anecdote" /></div>
-        <button type="submit" >create</button>
+      <form onSubmit={createAnecdotes}>
+        <div>
+          <input type="text" name="anecdote" />
+        </div>
+        <button type="submit">Create</button>
       </form>
     </div>
-  )
-}
-export default AnecdoteForm
+  );
+};
+
+export default AnecdoteForm;

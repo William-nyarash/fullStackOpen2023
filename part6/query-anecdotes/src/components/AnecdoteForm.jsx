@@ -28,9 +28,7 @@ const AnecdoteForm = () => {
       <h3>Create New Anecdote</h3>
       <form onSubmit={onCreate}>
         <input name="anecdote" />
-        <button type="submit" >
-          {/* {newAnecdoteMutation.isLoading ? 'Creating...' : 'Create'} */}
-        </button>
+        <button type="submit">create</button>
       </form>
     </div>
   )

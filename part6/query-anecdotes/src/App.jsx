@@ -3,6 +3,8 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import Vote from './components/Vote'
 import { getAnecdote, voteAnecdote } from './request'
+import { NotificationProvider } from './components/NotificationContext'
+
 
 const App = () => {
   const queryClient = useQueryClient()
@@ -17,7 +19,7 @@ const App = () => {
     return <div>Loading anecdotes...</div>
   }
   return (
-    <div>
+    <NotificationProvider>
       <h3>Anecdote App</h3>
 
       <Notification />
@@ -28,7 +30,7 @@ const App = () => {
             <Vote anecdote={anecdote}/>
         </div>
       ))}
-    </div>
+    </NotificationProvider>
   )
 }
 

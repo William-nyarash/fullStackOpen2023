@@ -1,10 +1,10 @@
-import { useMutation,  useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createAnecdote } from '../request'
 import { useNotification } from './NotificationContext'
 
 const AnecdoteForm = () => {
   const queryClient = useQueryClient()
-  const dispatch = useNotification
+  const { dispatch } = useNotification() 
 
   const newAnecdoteMutation = useMutation({
     mutationFn: createAnecdote,
@@ -19,10 +19,16 @@ const AnecdoteForm = () => {
     event.target.anecdote.value = ''
     
     if (anecdote && anecdote.length >= 5) {
-      newAnecdoteMutation.mutate({ content: anecdote, votes: 0 })
-      dispatch({ type: 'SET_NOTIFICATION', payload: `Anecdote "${anecdote}" created!` });
+      newAnecdoteMutation.mutate({ anecdote, votes: 0 })
+      dispatch({ type: 'SET_NOTIFICATION', payload: `Anecdote "${anecdote}" created!` })
+      setTimeout(() => {
+        dispatch({ type: 'CLEAR_NOTIFICATION' })
+      }, 5000)
     } else {
-      alert("Anecdote content must be at least 5 characters long")
+      dispatch({ type: 'SET_NOTIFICATION', payload: "Anecdote content must be at least 5 characters long!" })
+        setTimeout(() => {
+        dispatch({ type: 'CLEAR_NOTIFICATION' })
+      }, 5000)
     }
   }
 
@@ -36,5 +42,4 @@ const AnecdoteForm = () => {
     </div>
   )
 }
-
 export default AnecdoteForm

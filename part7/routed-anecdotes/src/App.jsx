@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Link,Route, Routes, useMatch} from 'react-router-dom'
 
 const Menu = () => {
@@ -50,7 +50,27 @@ const About = () => (
     <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
   </div>
 )
+const Notification = ({ notification }) => {
+  const [notify, setNotify] = useState('');
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotify(notification);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [notification]); 
+  const padding ={
+    padding: 10,
+    border:2
+  }
+
+  return (
+    <div style={padding}>
+      {notify ? `A new anecdote "${notify}" created!` : ''}
+    </div>
+  );
+};
 const Footer = () => (
   <div>
     Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
@@ -120,11 +140,12 @@ const App = () => {
  
 
   // eslint-disable-next-line no-unused-vars
-  const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState(null)
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(anecdote.content)
   }
 
   const anecdoteById = (id) =>
@@ -143,11 +164,12 @@ const App = () => {
   }
   const match = useMatch('/anecdotes/:id')
   const anecdote = match ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id)) : null
-
+  
   return (
     <div>
       <h1>Software anecdotes</h1>
       <Menu />
+      <Notification notification={notification} />
       <Routes>
         <Route path="/" element={<AnecdoteList anecdotes={anecdotes}/>} />
         <Route path='/anecdotes/:id' element={<Anecdote anecdote={anecdote}/>}/>

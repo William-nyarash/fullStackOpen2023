@@ -60,13 +60,16 @@ const Notification = ({ notification }) => {
 
     return () => clearTimeout(timer);
   }, [notification]); 
-  const padding ={
+ const style = {
+    border: "solid",
     padding: 10,
-    border:2
+    borderWidth: 1,
+    marginBottom: 5,
+    color: "black",
   }
 
   return (
-    <div style={padding}>
+    <div style={style}>
       {notify ? `A new anecdote "${notify}" created!` : ''}
     </div>
   );

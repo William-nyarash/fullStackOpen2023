@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {Link,Route, Routes, useMatch} from 'react-router-dom'
+import Footer from './components/Footer'
+import useField from './hook'
 
 const Menu = () => {
   const padding = {
@@ -51,15 +53,7 @@ const About = () => (
   </div>
 )
 const Notification = ({ notification }) => {
-  const [notify, setNotify] = useState('');
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotify(notification);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [notification]); 
  const style = {
     border: "solid",
     padding: 10,
@@ -68,53 +62,59 @@ const Notification = ({ notification }) => {
     color: "black",
   }
 
+
+ if (!notification) return null
+ else
   return (
-    <div style={style}>
-      {notify ? `A new anecdote "${notify}" created!` : ''}
+      <div style={style}>
+        {notification ? `A new anecdote ${notification}" created!` : ''}
     </div>
   );
 };
-const Footer = () => (
-  <div>
-    Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
-
-    See <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js</a> for the source code.
-  </div>
-)
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  const content = useField('text')
+  const author = useField('text')
+  const info= useField('text')
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0
     })
-  }
 
+    content.reset()
+    author.reset()
+    info.reset()
+  }
+  const handleReset = ()=> {
+    content.reset()
+    author.reset()
+    info.reset()
+  }
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input {...content} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input {...author} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input {...info} />
         </div>
         <button>create</button>
+        
+        <button onClick={handleReset}>reset</button>
       </form>
     </div>
   )
@@ -146,10 +146,20 @@ const App = () => {
   const [notification, setNotification] = useState(null)
 
   const addNew = (anecdote) => {
-    anecdote.id = Math.round(Math.random() * 10000)
-    setAnecdotes(anecdotes.concat(anecdote))
-    setNotification(anecdote.content)
-  }
+    if (!anecdote.content || !anecdote.author || !anecdote.info) {
+      setNotification('All fields must be filled out');
+      setTimeout(() => setNotification(null), 500); 
+      return; 
+    }
+  
+    anecdote.id = Math.round(Math.random() * 10000);
+  
+    setAnecdotes(anecdotes.concat(anecdote));
+    
+   setNotification(`A new anecdote created: ${anecdote.content}`);
+    
+   setTimeout(() => setNotification(null), 5000);
+  };
 
   const anecdoteById = (id) =>
     anecdotes.find(a => a.id === id)

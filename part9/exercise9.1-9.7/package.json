@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "calculateBmi": "ts-node bmiCalculator.ts",
-    "calculateExercise": "ts-node exerciseCalculator.ts",
+    "calculateExercise": "ts-node exerciseCalculator.ts"
   },
   "dependencies": {
     "@types/node": "^22.15.21",

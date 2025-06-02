@@ -1,0 +1,148 @@
+Script started on 2025-06-02 21:58:13+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="135" LINES="16"]
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> docke[K[K[K[K[Ksudo docker contained[Kr run [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kdocker sl[K[Kls[Ka
+docker: unknown command: docker la
+
+Run 'docker --help' for more information
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> docker --help
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  bake        Build from a file
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Authenticate to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx
+  checkpoint  Manage checkpoints
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  config      Manage Swarm configs
+  node        Manage Swarm nodes
+  secret      Manage Swarm secrets
+  service     Manage Swarm services
+  stack       Manage Swarm stacks
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default "/home/waren/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default
+                           context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info", "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/home/waren/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/home/waren/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/home/waren/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> dochke[K[K[Kker ls -a 
+unknown shorthand flag: 'a' in -a
+
+Usage:  docker [OPTIONS] COMMAND [ARG...]
+
+Run 'docker --help' for more information
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> sudo docker ls -a
+][sudo] password for root: 
+Sorry, try again.
+[sudo] password for root: 
+unknown shorthand flag: 'a' in -a
+
+Usage:  docker [OPTIONS] COMMAND [ARG...]
+
+Run 'docker --help' for more information
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> sudo docker ls -a[1P[1P[1P[1P[1P[C[C[C[C[C[C[C[1@ [1@c[1@o[1@n[1@t[1@a[1@i[1@n[1@d[1@e[1P[1P[1@e[1@r
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.49/containers/json?all=1": dial unix /var/run/docker.sock: connect: permission denied
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> docker container ls -a[1@s[1@i[1P[1@u[C[1@d[1@p[1@ [1P[1P[1@o[1@ 
+CONTAINER ID   IMAGE         COMMAND    CREATED       STATUS                     PORTS     NAMES
+36ce490172f0   ubuntu        "bash"     13 days ago   Exited (255) 10 days ago             exciting_rubin
+a1385e0da039   hello-world   "/hello"   13 days ago   Exited (0) 13 days ago               pedantic_euclid
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> sudo docker container ls -a[K[K[K[K[Krun 36ce40[K990[K[K0172f0
+Unable to find image '36ce490172f0:latest' locally
+docker: Error response from daemon: pull access denied for 36ce490172f0, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+Run 'docker run --help' for more information
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> sudo doch[Kker container rn[Kun i[K-[[Kit ubuntu bash  [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K 
+[?2004h]0;root@794708af7abf: /root@794708af7abf:/# cd usr/    /usr/src/app
+[?2004lbash: cd: /usr/src/app: No such file or directory
+[?2004h]0;root@794708af7abf: /root@794708af7abf:/# ls
+[?2004l[0m[01;36mbin[0m  [01;34mboot[0m  [01;34mdev[0m  [01;34metc[0m  [01;34mhome[0m  [01;36mlib[0m  [01;36mlib64[0m  [01;34mmedia[0m  [01;34mmnt[0m  [01;34mopt[0m  [01;34mproc[0m  [01;34mroot[0m  [01;34mrun[0m  [01;36msbin[0m  [01;34msrv[0m  [01;34msys[0m  [30;42mtmp[0m  [01;34musr[0m  [01;34mvar[0m
+[?2004h]0;root@794708af7abf: /root@794708af7abf:/# cd /ussr r  r/src   
+[?2004l[?2004h]0;root@794708af7abf: /usrroot@794708af7abf:/usr# ls
+[?2004l[0m[01;34mbin[0m  [01;34mgames[0m  [01;34minclude[0m  [01;34mlib[0m  [01;34mlib64[0m  [01;34mlibexec[0m  [01;34mlocal[0m  [01;34msbin[0m  [01;34mshare[0m  [01;34msrc[0m
+[?2004h]0;root@794708af7abf: /usrroot@794708af7abf:/usr# s cd src
+[?2004l[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# ls
+[?2004l[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# mk  mkdir app
+[?2004l[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# ;s  ls
+[?2004l[0m[01;34mapp[0m
+[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# touch index.js
+[?2004l[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# ls' 
+[?2004l[0m[01;34mapp[0m  index.js
+[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# c mv index.js  .app   /app/
+[?2004l[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# ls
+[?2004l[0m[01;34mapp[0m
+[?2004h]0;root@794708af7abf: /usr/srcroot@794708af7abf:/usr/src# cd app/
+[?2004l[?2004h]0;root@794708af7abf: /usr/src/approot@794708af7abf:/usr/src/app# ls
+[?2004lindex.js
+[?2004h]0;root@794708af7abf: /usr/src/approot@794708af7abf:/usr/src/app# exit
+[?2004lexit
+7]2;waren@localhost.localdomain:...ons/script-answers]1;localhost.localdomain8waren@localhost:~/Documents/fullStackOpen2023/part12-containers-applications/script-answers> exit
+exit
+[
+Script done on 2025-06-02 22:04:35+03:00 [COMMAND_EXIT_CODE="0"]

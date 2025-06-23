@@ -1,10 +1,12 @@
+require.main === module
+
 type Prognosis = 'normal range' | 'overweight' | 'under weight' | 'obese' | 'invalid input';
 
 interface bmivalues {
     value1: number
     value2:number
 }
-const dataFromCli = ( args: string [] ):bmivalues=> {
+export  const dataFromCli = ( args: string [] ):bmivalues=> {
     if(args.length < 4) throw new Error('less arguments than expected') 
     if(args.length > 4) throw new Error('too much arguments than expected') 
 
@@ -17,7 +19,7 @@ const dataFromCli = ( args: string [] ):bmivalues=> {
             };
         }
     }
-const calculateBmi = (height: number, weight: number): Prognosis => {
+export const calculateBmi = (height: number, weight: number): Prognosis => {
     
     if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
         return 'invalid input';
@@ -41,7 +43,7 @@ const calculateBmi = (height: number, weight: number): Prognosis => {
 
 try {
     const {value1, value2} = dataFromCli(process.argv);
-    console.log(`Prognosis:${calculateBmi(value1,value2)}`);
+    console.log(`Prognosis: ${calculateBmi(value1,value2)}`);
 }catch (error: unknown) {
  let errorMessage= 'An error occured'
  if(error instanceof Error) {

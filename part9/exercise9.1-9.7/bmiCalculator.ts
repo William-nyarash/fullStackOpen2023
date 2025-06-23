@@ -1,4 +1,4 @@
-require.main === module
+require.main === module;
 
 type Prognosis = 'normal range' | 'overweight' | 'under weight' | 'obese' | 'invalid input';
 

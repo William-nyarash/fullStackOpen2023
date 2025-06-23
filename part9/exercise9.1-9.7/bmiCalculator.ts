@@ -1,4 +1,4 @@
-type Prognosis = 'normal range' | 'over weight' | 'under weight' | 'obese' | 'invalid input';
+type Prognosis = 'normal range' | 'overweight' | 'under weight' | 'obese' | 'invalid input';
 
 interface bmivalues {
     value1: number
@@ -31,7 +31,7 @@ const calculateBmi = (height: number, weight: number): Prognosis => {
       } else if (bmi <= 24.9) {
         return 'normal range';
       } else if (bmi <= 29.9) {
-        return 'over weight';
+        return 'overweight';
       } else if (bmi >= 30) {
         return 'obese';
       } else {

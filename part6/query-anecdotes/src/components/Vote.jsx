@@ -8,9 +8,14 @@ const Vote = ({anecdote}) => {
     const anecdoteToVoteFor = anecdote
     const voteMutation= useMutation({
         mutationFn: voteAnecdote,
-        onSuccess: () =>{
-            queryClient.invalidateQueries(['anecdotes'])
-        }
+        onSuccess: (anecdoteWithVote) => {
+            queryClient.setQueryData(['anecdotes'], (previousAnecdotes) => {
+                return previousAnecdotes.map(anecdote => 
+                    // eslint-disable-next-line react/prop-types
+                    anecdote.id === anecdoteWithVote.id ? anecdoteWithVote : anecdote
+                )
+            })
+          }
     })
     const handleVote = () => {
         const updatedVotes = anecdoteToVoteFor.votes + 1

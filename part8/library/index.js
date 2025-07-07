@@ -112,17 +112,17 @@ const typeDefs = `
     born: Int
   }
   type Query {
-    getAuthors: [Authors]
-    getBooks: [Books]
+    authorCount: Int!
+    bookCount: Int!
   }
 `
 
 const resolvers = {
   Query:{
-    getBooks: () => books,
-    getAuthors: () => authors
+    bookCount: () => books.length,
+    authorCount: () => authors.length
+  },
 
-  }
 }
 
 const server = new ApolloServer({

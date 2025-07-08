@@ -1,6 +1,7 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
-const {GraphQlError} = require('graphql')
+const {GraphQLError} = require('graphql')
+const {v1: uuid} = require('uuid');
 
 let authors = [
   {
@@ -96,10 +97,18 @@ const typeDefs = `
     born: Int
     bookCount: Int!
   }
+  type Mutation {
+  addBook(
+  title:String!
+  author:String!
+  published:Int!
+  genres: [String!]  
+  ): Book
+  }
   type Query {
     authorCount: Int!
     bookCount: Int!
-    allBooks(author: String): [Book !]!
+    allBooks(author: String, genres: String!): [Book !]!
     allAuthors: [Author]!
   }
 `
@@ -110,19 +119,35 @@ const resolvers = {
     authorCount: () => authors.length,
     allBooks: (root, args) =>{
 
-      if(!args.author){
-        return books
-      }
-      const authorsWithBooks = books.filter(book => book.author ===   args.author)
-      if (authorsWithBooks.length === 0) {
-        throw new GraphQlError("the user doesn't seem to have a book yet", {
-          extentions: {
-            code: 'BAD_USER_INPUT',
-            invalidArgs: args.author
-          }
-        })
-      }
-      return authorsWithBooks
+    if (!args.author && !args.genres) {
+      return books;
+    }
+    let filteredBooks = books;
+
+    if (args.author) {
+    filteredBooks = filteredBooks.filter(book => book.author === args.author);
+    if (filteredBooks.length === 0) {
+      throw new GraphQLError("The author doesn't seem to have any books yet.", {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.author
+        }
+      });
+    }
+    }
+
+    if (args.genres) {
+    filteredBooks = filteredBooks.filter(book => book.genres.includes(args.genres));
+    if (filteredBooks.length === 0) {
+      throw new GraphQLError("The genre doesn't seem to be in our database.", {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.genres
+        }
+      });
+    }
+    }
+        return filteredBooks;
        },
     allAuthors: () =>  authors.map(author => {
         const bookCount  = books.filter(book => book.author === author.name).length
@@ -132,7 +157,23 @@ const resolvers = {
         }
       }
     )
+  },
+  Mutation: {
+    addBook: (root,args) => {
+        if(books.find(book => book.title === args.title)) {
+          throw new GraphQLError("title must be unique", {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              invalidArgs: args.title
+            }
+          })
+        }
+        const book = {...args, id: uuid()}
+        books = books.concat(book)
+        return book
+    }
   }
+
 
 }
 

@@ -114,7 +114,6 @@ const resolvers = {
         return books
       }
       const authorsWithBooks = books.filter(book => book.author ===   args.author)
-      console.log("the server is returning", authorsWithBooks)
       if (authorsWithBooks.length === 0) {
         throw new GraphQlError("the user doesn't seem to have a book yet", {
           extentions: {

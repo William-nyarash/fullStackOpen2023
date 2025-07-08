@@ -1,5 +1,6 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
+const {GraphQlError} = require('graphql')
 
 let authors = [
   {
@@ -26,20 +27,6 @@ let authors = [
     id: "afa5b6f3-344d-11e9-a414-719c6709cf3e",
   },
 ]
-
-/*
- * Suomi:
- * Saattaisi olla järkevämpää assosioida kirja ja sen tekijä tallettamalla kirjan yhteyteen tekijän nimen sijaan tekijän id
- * Yksinkertaisuuden vuoksi tallennamme kuitenkin kirjan yhteyteen tekijän nimen
- *
- * English:
- * It might make more sense to associate a book with its author by storing the author's id in the context of the book instead of the author's name
- * However, for simplicity, we will store the author's name in connection with the book
- *
- * Spanish:
- * Podría tener más sentido asociar un libro con su autor almacenando la id del autor en el contexto del libro en lugar del nombre del autor
- * Sin embargo, por simplicidad, almacenaremos el nombre del autor en conexión con el libro
-*/
 
 let books = [
   {
@@ -112,7 +99,7 @@ const typeDefs = `
   type Query {
     authorCount: Int!
     bookCount: Int!
-    allBooks: [Book!]!
+    allBooks(author: String): [Book !]!
     allAuthors: [Author]!
   }
 `
@@ -121,14 +108,31 @@ const resolvers = {
   Query:{
     bookCount: () => books.length,
     authorCount: () => authors.length,
-    allBooks: () => books,
+    allBooks: (root, args) =>{
+
+      if(!args.author){
+        return books
+      }
+      const authorsWithBooks = books.filter(book => book.author ===   args.author)
+      console.log("the server is returning", authorsWithBooks)
+      if (authorsWithBooks.length === 0) {
+        throw new GraphQlError("the user doesn't seem to have a book yet", {
+          extentions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.author
+          }
+        })
+      }
+      return authorsWithBooks
+       },
     allAuthors: () =>  authors.map(author => {
         const bookCount  = books.filter(book => book.author === author.name).length
         return {
           name: author.name,
           bookCount
         }
-      })
+      }
+    )
   }
 
 }

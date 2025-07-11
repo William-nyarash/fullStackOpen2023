@@ -116,6 +116,7 @@ const typeDefs = `
     bookCount: Int!
     allBooks(author: String, genres: String!): [Book !]!
     allAuthors: [Author]!
+    unFilteredBooks: [Book!]!
   }
 `
 
@@ -163,7 +164,10 @@ const resolvers = {
           bookCount
         }
       }
-    )
+    ),
+    unFilteredBooks: () => {
+      return books
+    }
   },
   Mutation: {
     addBook: (root,args) => {

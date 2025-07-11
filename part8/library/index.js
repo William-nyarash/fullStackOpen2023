@@ -125,21 +125,21 @@ const resolvers = {
     authorCount: () => authors.length,
     allBooks: (root, args) =>{
 
-    if (!args.author && !args.genres) {
-      return books;
-    }
-    let filteredBooks = books;
+      if (!args.author && !args.genres) {
+        return books;
+      }
+      let filteredBooks = books;
 
-    if (args.author) {
-    filteredBooks = filteredBooks.filter(book => book.author === args.author);
-    if (filteredBooks.length === 0) {
-      throw new GraphQLError("The author doesn't seem to have any books yet.", {
-        extensions: {
-          code: 'BAD_USER_INPUT',
-          invalidArgs: args.author
+      if (args.author) {
+        filteredBooks = filteredBooks.filter(book => book.author === args.author);
+          if (filteredBooks.length === 0) {
+            throw new GraphQLError("The author doesn't seem to have any books yet.", {
+              extensions: {
+                code: 'BAD_USER_INPUT',
+                invalidArgs: args.author
+              }
+          });
         }
-      });
-    }
     }
 
     if (args.genres) {
@@ -159,6 +159,7 @@ const resolvers = {
         const bookCount  = books.filter(book => book.author === author.name).length
         return {
           name: author.name,
+          born: author.born,
           bookCount
         }
       }

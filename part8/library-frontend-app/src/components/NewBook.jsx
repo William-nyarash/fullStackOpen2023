@@ -1,21 +1,45 @@
 import { useState } from 'react'
+import { gql, useMutation } from  '@apollo/client';
 
-const NewBook = (props) => {
+
+const CREATE_BOOK = gql `
+  mutation createBook (
+    $title: String!, 
+    $author: String!, 
+    $published: Int!, 
+    $genres:[String!]! 
+    ) { 
+    addBook( 
+      title: $title,
+      author:$author,
+      published:$published,
+      genres: $genres
+      ) {
+      id 
+      title 
+      author
+      published
+      genres 
+    }
+}
+`
+const NewBook = (prop) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
 
-  if (!props.show) {
+  const [ createBook, {error}] = useMutation(CREATE_BOOK);
+
+  if (!prop.show) {
     return null
   }
 
   const submit = async (event) => {
     event.preventDefault()
-
-    console.log('add book...')
-
+    const publishedInt = parseInt(published , 10);
+    createBook({ variables: {title,author,published: publishedInt,genres}})
     setTitle('')
     setPublished('')
     setAuthor('')
@@ -28,8 +52,10 @@ const NewBook = (props) => {
     setGenre('')
   }
 
-  return (
+    return (
     <div>
+      {/* display error message when invalid data is entered */}
+      {error ? <p>{error.message}</p>: null}
       <form onSubmit={submit}>
         <div>
           title

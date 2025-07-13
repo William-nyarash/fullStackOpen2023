@@ -2,20 +2,15 @@ import { useState } from "react";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
-import {useQuery, gql} from '@apollo/client';
+import {useQuery} from '@apollo/client';
+import { ALL_AUTHORS } from "./queries";
 
-const  ALL_AUTHORS = gql `
-  query {
-    allAuthors {
-      name
-      born
-      bookCount
-    }
-  }
-`
+
 const App = () => {
   const [page, setPage] = useState("authors");
-  const result = useQuery(ALL_AUTHORS);
+  const result = useQuery(ALL_AUTHORS,{
+    polInterval: 2000
+});
 
   if(result.loading) {
     return <div>Loading ....</div>

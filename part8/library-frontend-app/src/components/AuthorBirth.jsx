@@ -1,13 +1,19 @@
 import { useState } from "react"
+import { useMutation } from "@apollo/client";
+import { ADD_AUTHOR_BIRTH, ALL_AUTHORS, ALL_BOOKS } from "../queries";
 
 const AuthorBirth =() => {
  const [name, setName ] = useState("");
  const [birth , setBirth] = useState("");
 
+const [editAuthor] = useMutation(ADD_AUTHOR_BIRTH, {
+    refetchQueries: [{query: ALL_AUTHORS}, {query: ALL_BOOKS}]
+})
 const handleSubmit =(event) =>{
     event.preventDefault();
-    console.log("the data from user name is: ", name);
-    console.log("the data from user birth  is: ",birth);
+
+    const parsedBorn = parseInt(birth, 10)
+    editAuthor({variables: {name, born: parsedBorn}})
     setName(' ');
     setBirth(' ');
 }

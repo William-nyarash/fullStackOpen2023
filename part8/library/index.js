@@ -108,7 +108,7 @@ const typeDefs = `
   editAuthor(
   name:String!
   born: Int!
-  ): Author
+  ): Author!
 
   }
   type Query {
@@ -122,7 +122,7 @@ const typeDefs = `
 
 const resolvers = {
   Query:{
-    bookCount: () => books.length,
+    bookCount: () => books.length || 0 ,
     authorCount: () => authors.length,
     allBooks: (root, args) =>{
 
@@ -185,9 +185,10 @@ const resolvers = {
     },
     editAuthor: (root,args) => {
       const author = authors.find(author => author.name === args.name)
-
       if (!author) {
-        return null
+        throw new GraphQLError("Author not found", {
+          extensions: { code: 'BAD_USER_INPUT'}
+        });
       }
       const updateAuthor = {...author, born: args.born}
       authors = authors.map(author =>  author.name === args.name ? updateAuthor : author)

@@ -56,7 +56,6 @@ export const ADD_AUTHOR_BIRTH = gql    `
             name
             id
             born
-            bookCount
         }
     }
 `

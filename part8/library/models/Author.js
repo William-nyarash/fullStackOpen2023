@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const uniqueValidator = require('@ladjs/mongoose-unique-validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const schema = new mongoose.Schema({
   name: {

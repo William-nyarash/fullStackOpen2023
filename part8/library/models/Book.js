@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 // you must install this library
-const uniqueValidator = require('@ladjs/mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator')
 const schema = new mongoose.Schema({
   title: {
     type: String,

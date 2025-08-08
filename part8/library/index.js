@@ -167,7 +167,15 @@ const resolvers = {
   },
   Mutation: {
     addBook: async (root,args) => {
-        const exitstingBook = await  Book.findOne({ title: args.title})
+        if(!args.title || args.title.length < 5) {
+          throw new GraphQLError("Title field must be longer than 5 characters", {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              invalidArgs:args.title
+            }
+          })
+        }  
+      const exitstingBook = await  Book.findOne({ title: args.title})
         if(exitstingBook) {
           throw new GraphQLError("title must be unique", {
             extensions: {

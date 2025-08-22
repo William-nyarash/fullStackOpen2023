@@ -37,9 +37,10 @@ singleRouter.delete('/', async (req, res) => {
 singleRouter.get('/', async (req, res) => {
   try {
   const todo = req.todo
+  if(!todo) res.stats(405).send("todo not found");
   res.send(todo);
-  } catch(error) {
-  res.sendStatus(405); // Implement this
+  } catch(error) {  
+  res.status(500).send(error.message); 
   }
 });
 

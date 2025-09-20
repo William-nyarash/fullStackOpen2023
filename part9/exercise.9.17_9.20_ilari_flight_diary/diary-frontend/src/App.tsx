@@ -7,10 +7,15 @@ function App() {
   const [diary , setDiary] = useState<Diary[]>([ ]);
   const [date, setDate] = useState('');
   const [visibility, setVisibility] = useState('');
-  const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
+  const [weather, setSWeathert] = useState("");
 
-
+  const handleWeatherChange =(event: { target: { value: SetStateAction<string>; }; })=> {
+      setWeather(event.target.value);
+  }
+  const handleVisibilityChange =(event: {target: {value: SetStateAction<string>;};})=> {
+    setVisibility(event.target.value)
+  }
   useEffect(() => {
     getAllDiaries()
       .then( (data: SetStateAction<Diary[]>) => {
@@ -31,44 +36,127 @@ function App() {
       setDiary(diary.concat(data)); 
       setDate('');
       setComment('');
-      setWeather('');
+      setWeather("");
       setVisibility('');
     });
   };
 
   return (
     <>
-      <div>The Diary Application</div>
+      <h1>
+        Add new entry
+      </h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="date">Date</label>
-          <input type="text" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date"  value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="visibility">Visibility</label>
-          <input type="text" value={visibility} onChange={(e) => setVisibility(e.target.value)} />
-        </div>
+          visibility
+            <label htmlFor="visibility">
+              <input type="radio"
+              name="visibility"
+              value="great"
+              checked={visibility === "great"} 
+              onChange={handleVisibilityChange}/>
+              great
+            </label>
+            <label htmlFor="visibility">
+              <input type="radio"
+              name="visibility"
+              value="good"
+              checked={visibility === "good"} 
+              onChange={handleVisibilityChange}/>
+              good
+            </label>
+            <label htmlFor="visibility">
+              <input type="radio"
+              name="visibility"
+              value="ok"
+              checked={visibility === "ok"} 
+              onChange={handleVisibilityChange}/>
+              ok
+            </label>
+            <label htmlFor="visibility">
+              <input type="radio"
+              name="visibility"
+              value="poor"
+              checked={visibility === "poor"} 
+              onChange={handleVisibilityChange}/>
+              poor
+            </label>
+          </div>
         <div>
-          <label htmlFor="weather">Weather</label>
-          <input type="text" value={weather} onChange={(e) => setWeather(e.target.value)} />
+          weather
+          <label htmlFor="weather">
+          <input
+           type="radio"
+           name="weather" 
+           value="stormy"
+           checked={weather === "stormy"}
+           onChange={handleWeatherChange}
+           /> 
+           stormy
+          </label>
+          <label htmlFor="weather">
+            <input
+              type='radio'
+              name="weather"
+              value="sunny"
+              checked={weather === "sunny"}
+              onChange={handleWeatherChange}
+              />
+              sunny
+        </label>
+          <label htmlFor="weather">
+            <input
+             type="radio"
+             name="weather"
+             value="windy"
+             checked={weather === "windy"}
+             onChange={handleWeatherChange}
+             />
+             windy
+          </label>
+          <label htmlFor="weather">
+            <input type="radio"
+            name='weather'
+            value="cloudy"
+            checked={weather === "cloudy"}
+            onChange={handleWeatherChange}
+           />
+           cloudy
+          </label>
+          <label htmlFor="weather">
+            <input type="radio"
+            name='weather'
+            value="rainy"
+            checked={weather === "rainy"}
+            onChange={handleWeatherChange} />
+            rainy
+          </label>
         </div>
         <div>
           <label htmlFor="comment">Comment</label>
           <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
         </div>
-        <button type="submit">Record</button>
+        <button type="submit">add</button>
       </form>
-
-      <ul>
-        {diary.map((d) => (
-          <p key={d.id}>
-            <strong>{d.date}</strong>
-            <br />
-            Visibility: {d.visibility} <br />
-            Weather: {d.weather}
-          </p>
-        ))}
-      </ul>
+<div>
+    <h1>
+      Diary entries
+    </h1>
+        <ul>
+          {diary.map((d) => (
+            <p key={d.id}>
+              <strong>{d.date}</strong>
+              <br />
+              Visibility: {d.visibility} <br />
+              Weather: {d.weather}
+            </p>
+          ))}
+        </ul>
+</div>
     </>
   );
 }

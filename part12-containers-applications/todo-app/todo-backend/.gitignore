@@ -48,6 +48,9 @@ typings/
 # Optional REPL history
 .node_repl_history
 
+# redis data volume
+redis_data/
+
 # Output of 'npm pack'
 *.tgz
 

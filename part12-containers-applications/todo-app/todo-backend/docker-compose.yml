@@ -1,6 +1,7 @@
 services:
  app:
    image: todo-app
-   build: .
+   build: 
+    context: .
    ports:
       - 3123:3000

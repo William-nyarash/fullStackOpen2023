@@ -51,6 +51,9 @@ typings/
 # redis data volume
 redis_data/
 
+# mongo db
+mongo_data/
+
 # Output of 'npm pack'
 *.tgz
 

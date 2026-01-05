@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1767000617433" clover="3.2.0">
+  <project timestamp="1767000617434" name="All files">
+    <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="6" elements="19" coveredelements="17" complexity="0" loc="10" ncloc="10" packages="1" files="1" classes="1"/>
+    <file name="List.jsx" path="/home/waren/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-frontend/src/Todos/List.jsx">
+      <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="6"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="8" type="stmt"/>
+      <line num="5" count="0" type="stmt"/>
+      <line num="8" count="4" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="25" count="4" type="stmt"/>
+      <line num="36" count="4" type="stmt"/>
+      <line num="44" count="4" type="stmt"/>
+    </file>
+  </project>
+</coverage>

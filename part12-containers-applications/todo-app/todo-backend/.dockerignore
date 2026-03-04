@@ -1,2 +1,8 @@
 node_modules/
 .env
+mongo_data
+redis_data
+.git
+.gitignore
+Dockerfile
+docker-compose*.yml

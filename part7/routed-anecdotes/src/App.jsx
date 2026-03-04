@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Link, Route, Routes, useMatch } from "react-router-dom";
+import { Link, Route, Routes, useMatch, useNavigate } from "react-router-dom";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import About from "./components/About";
@@ -53,7 +53,7 @@ const CreateNew = (props) => {
   const content = useField("text");
   const author = useField("text");
   const info = useField("url");
-
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +63,7 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0,
     });
-
+    navigate("/");
     content.reset();
     author.reset();
     info.reset();

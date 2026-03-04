@@ -2,7 +2,7 @@
 
 This repository contains my solutions and project implementations for the Full Stack Open course by the University of *Helsinki*.
 
-I have completed the curriculum up to Part 9 and  part 12 (containerization), covering modern full-stack web development with JavaScript, React, Node.js, TypeScript, GraphQL, Docker and more.
+I have completed the curriculum up to Part 9 and  part 12 (Containers), covering modern full-stack web development with JavaScript, React, Node.js, TypeScript, GraphQL, Docker and more.
 
 ## About the Course
 
@@ -202,7 +202,7 @@ Structuring scalable projects
 ├── part7/   # Routing & Custom Hooks
 ├── part8/   # GraphQL
 |── part9/   # TypeScript 
-└── part12/   # Containerization
+└── part12/   # Containers
 
 ```
 
@@ -238,7 +238,7 @@ npm test
 - [ ] Part 8 – GraphQL
 - [x] Part 9 – TypeScript
 - [ ] Part 11 – CI/CD
-- [ ] Part 12
+- [ ] Part 12 - Containers
 
 
 

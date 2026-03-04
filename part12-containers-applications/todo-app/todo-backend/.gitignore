@@ -65,3 +65,5 @@ mongo_data/
 
 # next.js build output
 .next
+# data volumes
+/mongo_data 

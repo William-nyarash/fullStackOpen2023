@@ -3,6 +3,7 @@ const { Todo } = require('../mongo');
 const { getAsync, setAsync } = require('../redis');
 const { incrementCounter } = require('../redis/counter');
 const router = express.Router();
+const {incrementCounter} = require('../redis/counter') 
 
 /* GET todos listing. */
 router.get('/', async (_, res) => {
@@ -19,8 +20,7 @@ router.post('/', async (req, res) => {
     text: req.body.text,
     done: false
   })
-  
-
+ await incrementCounter();
   res.send(todo);
 });
 
@@ -44,9 +44,10 @@ singleRouter.delete('/', async (req, res) => {
 singleRouter.get('/', async (req, res) => {
   try {
   const todo = req.todo
+  if(!todo) res.stats(405).send("todo not found");
   res.send(todo);
-  } catch(error) {
-  res.sendStatus(405); // Implement this
+  } catch(error) {  
+  res.status(500).send(error.message); 
   }
 });
 

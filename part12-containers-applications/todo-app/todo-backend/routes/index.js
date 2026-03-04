@@ -6,11 +6,10 @@ const { getCounter } = require('../redis/counter');
 
 let visits = 0
 
-
 /* GET index data. */
 router.get('/', async (req, res) => {
   visits++
-
+console.log("the getasync returns",redis);
   res.send({
     ...configs,
     visits

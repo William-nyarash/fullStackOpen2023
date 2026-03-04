@@ -1,6 +1,7 @@
 Script started on 2025-12-26 17:07:32+03:00 [TERM="xterm-kitty" TTY="/dev/pts/0" COLUMNS="151" LINES="42"]
 [?2004h]0;waren@yeni: ~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backendwaren@yeni:~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backend$ docker container ls -a
-[?2004lCONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS                      PORTS                                           NAMES
+[?2004l
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS                      PORTS                                           NAMES
 c9e8f6c9e22d   mongo                     "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes                0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-backend-mongo-1
 b71852b85b15   c04fc574e069              "docker-entrypoint.s…"   3 weeks ago     Exited (1) 3 weeks ago                                                      suspicious_greider
 168682f58ba9   containered-node:latest   "docker-entrypoint.s…"   3 weeks ago     Exited (9) 3 weeks ago                                                      hungry_engelbart
@@ -13,8 +14,13 @@ a6daad921e9b   redis                     "docker-entrypoint.s…"   4 months ago
 50360b8c401d   todo-app                  "docker-entrypoint.s…"   4 months ago    Exited (137) 4 months ago                                                   reverent_boyd
 df60507b59dd   hello-world               "bash"                   4 months ago    Created                                                                     distracted_yonath
 [?2004h]0;waren@yeni: ~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backendwaren@yeni:~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backend$ docker exc[Kec -ir [K[Kt doto[K[K[K[Ktodo-backed[Knd-mongo-1 bash
-[?2004l[?2004hroot@c9e8f6c9e22d:/# mongosh -u root [12P(arg: 1) mongosh -u root (arg: 2) mongosh -u root [12@root@c9e8f6c9e22d:/# mongosh -u root   -= [p  p example
-[?2004l]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	694e96f45562ca53a889b03c
+[?2004l
+[?2004hroot@c9e8f6c9e22d:/# mongosh -u root 
+[12P(arg: 1) mongosh -u root 
+(arg: 2) mongosh -u root 
+[12@root@c9e8f6c9e22d:/# mongosh -u root   -= [p  p example
+[?2004l
+]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	694e96f45562ca53a889b03c
 Connecting to:		[1m[32mmongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.6[0m
 Using MongoDB:		8.0.13
 [1m[33mUsing Mongosh[0m:		2.5.6
@@ -31,16 +37,20 @@ For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
    2025-12-26T14:05:07.322+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
 [1m[33m------[0m
 
-[1G[0Jtest> [7Gs[1G[0Jtest> [7Gshow dbs
+[1G[0Jtest> [7Gs[1G[0Jtest> [7Gshow dbs
+
 [1madmin[0m         100.00 KiB
 [1mconfig[0m         72.00 KiB
 [1mlocal[0m          80.00 KiB
 [1mthe_database[0m   72.00 KiB
-[1G[0Jtest> [7Guse the_database
+[1G[0Jtest> [7Guse the_database
+
 switched to db the_database
-[1G[0Jthe_database> [15Gshow cole[1G[0Jthe_database> show col[23Glections
+[1G[0Jthe_database> [15Gshow cole[1G[0Jthe_database> show col[23Glections
+
 [1mtodos[0m
-[1G[0Jthe_database> [15Gdb.todos.find({}O[1G[0Jthe_database> db.todos.find({}[31G_[1G[0Jthe_database> db.todos.find({}[31G)
+[1G[0Jthe_database> [15Gdb.todos.find({}O[1G[0Jthe_database> db.todos.find({}[31G_[1G[0Jthe_database> db.todos.find({}[31G)
+
 [
   {
     _id: ObjectId([32m'688a67c563d7e53ce889b03d'[39m),
@@ -87,18 +97,26 @@ switched to db the_database
     __v: [33m0[39m
   }
 ]
-[1G[0Jthe_database> [15Gdb.todos.insertone(P[1G[0Jthe_database> db.todos.insertone([34G{text[33mtext[39m: [32m"[39m[32mI[39m[32mn[39m[32mc[39m[32mr[39m[32me[39m[32ma[39m[32ms[39m[32me[39m [32mt[39m[32mh[39m[32me[39m [32mn[39m[32mu[39m[32mm[39m[32mb[39m[32me[39m[32mr[39m [32mo[39m[32mf[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m[32ms[39m [32mi[39m[32mn[39m [32mm[39m[32my[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m [32mb[39m[32me[39m[32ml[39m[32mt[39m[32m"[39m, d[36mdo[39mdone: fals[33mfalse[39m}L[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m}[101G)
-Uncaught [1m[31mTypeError[0m: db.todos.insertone is not a function
-[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[102G[1D[1G[0Jthe_database> db.todos.insertone[44m([49m{[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[101G[1D[1G[0Jthe_database> db.todos.insertone([44m{[49m[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[100G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[99G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [44m[32m"[49mIncrease the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[86G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[85G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt[44m"[39m[49m, [33mdone[39m: [33mfalse[39m})[41G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[40G[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m[44m}[49m)[34G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m}[44m)[49m[33G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[32G[1D[1G[0Jthe_database> db.todos.insertne({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[30G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[31G[71C
+[1G[0Jthe_database> [15Gdb.todos.insertone(P[1G[0Jthe_database> db.todos.insertone([34G{text[33mtext[39m: [32m"[39m[32mI[39m[32mn[39m[32mc[39m[32mr[39m[32me[39m[32ma[39m[32ms[39m[32me[39m [32mt[39m[32mh[39m[32me[39m [32mn[39m[32mu[39m[32mm[39m[32mb[39m[32me[39m[32mr[39m [32mo[39m[32mf[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m[32ms[39m [32mi[39m[32mn[39m [32mm[39m[32my[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m [32mb[39m[32me[39m[32ml[39m[32mt[39m[32m"[39m, d[36mdo[39mdone: fals[33mfalse[39m}L[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m}[101G)
+
+Uncaught 
+[1m[31mTypeError[0m: db.todos.insertone is not a function
+[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[102G[1D[1G[0Jthe_database> db.todos.insertone[44m([49m{[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[101G[1D[1G[0Jthe_database> db.todos.insertone([44m{[49m[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[100G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[99G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [44m[32m"[49mIncrease the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[86G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[85G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt[44m"[39m[49m, [33mdone[39m: [33mfalse[39m})[41G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[40G[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m[44m}[49m)[34G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m}[44m)[49m[33G[1D[1G[0Jthe_database> db.todos.insertone({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[32G[1D[1G[0Jthe_database> db.todos.insertne({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[30G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m"Increase the number of tools in my tool belt"[39m, [33mdone[39m: [33mfalse[39m})[31G[71C
+
 {
   acknowledged: [33mtrue[39m,
   insertedId: ObjectId([32m'694e97da5562ca53a889b03d'[39m)
 }
-[1G[0Jthe_database> [15Gd[36mdo[39m[1G[0Jthe_database> d[16Gb.todos.find([1G[0Jthe_database> db.todos.find[28GById([32m'[39m[32m6[39m[32m9[39m[32m4[39m[32me[39m[32m9[39m[32m7[39m[32md[39m[32ma[39m[32m5[39m[32m5[39m[32m6[39m[32m2[39m[32mc[39m[32ma[39m[32m5[39m[32m3[39m[32ma[39m[32m8[39m[32m8[39m[32m9[39m[32mb[39m[32m0[39m[32m3[39m[32md[39m[32m'[39m)
-Uncaught [1m[31mTypeError[0m: db.todos.findById is not a function
-[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m)[60G[1D[1G[0Jthe_database> db.todos.findById[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[59G[1D[1G[0Jthe_database> db.todos.findById([44m[32m'[49m694e97da5562ca53a889b03d'[39m)[58G[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m)[57G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d[44m'[39m[49m)[33G[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[32G[1G[0Jthe_database> db.todos.findByI([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[31G[1G[0Jthe_database> db.todos.findBy([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[30G[1G[0Jthe_database> db.todos.findB([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[29G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[28G[28C[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m)[56G
-Uncaught [1m[31mMongoInvalidArgumentError[0m: Query filter must be a plain object or ObjectId
-[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m)[56G[1D[1G[0Jthe_database> db.todos.find[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[55G[1D[1G[0Jthe_database> db.todos.find([44m[32m'[49m694e97da5562ca53a889b03d'[39m)[54G[1C[1G[0Jthe_database> db.todos.find[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[55G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d)[39m[54G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03)[39m[53G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b0)[39m[52G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b)[39m[51G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889)[39m[50G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a88)[39m[49G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a8)[39m[48G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a)[39m[47G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53)[39m[46G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca5)[39m[45G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca)[39m[44G[1G[0Jthe_database> db.todos.find([32m'694e97da5562c)[39m[43G[1G[0Jthe_database> db.todos.find([32m'694e97da5562)[39m[42G[1G[0Jthe_database> db.todos.find([32m'694e97da556)[39m[41G[1G[0Jthe_database> db.todos.find([32m'694e97da55)[39m[40G[1G[0Jthe_database> db.todos.find([32m'694e97da5)[39m[39G[1G[0Jthe_database> db.todos.find([32m'694e97da)[39m[38G[1G[0Jthe_database> db.todos.find([32m'694e97d)[39m[37G[1G[0Jthe_database> db.todos.find([32m'694e97)[39m[36G[1G[0Jthe_database> db.todos.find([32m'694e9)[39m[35G[1G[0Jthe_database> db.todos.find([32m'694e)[39m[34G[1G[0Jthe_database> db.todos.find([32m'694)[39m[33G[1G[0Jthe_database> db.todos.find([32m'69)[39m[32G[1G[0Jthe_database> db.todos.find([32m'6)[39m[31G[1G[0Jthe_database> db.todos.find([32m')[39m[30G[1G[0Jthe_database> db.todos.find[44m([49m)[29G[1G[0Jthe_database> db.todos.find[44m([49m{)[30G[1G[0Jthe_database> db.todos.find[44m([49m{})[31G[1C[1G[0Jthe_database> db.todos.find({})[32G
+[1G[0Jthe_database> [15Gd[36mdo[39m[1G[0Jthe_database> d[16Gb.todos.find([1G[0Jthe_database> db.todos.find[28GById([32m'[39m[32m6[39m[32m9[39m[32m4[39m[32me[39m[32m9[39m[32m7[39m[32md[39m[32ma[39m[32m5[39m[32m5[39m[32m6[39m[32m2[39m[32mc[39m[32ma[39m[32m5[39m[32m3[39m[32ma[39m[32m8[39m[32m8[39m[32m9[39m[32mb[39m[32m0[39m[32m3[39m[32md[39m[32m'[39m)
+
+Uncaught 
+[1m[31mTypeError[0m: db.todos.findById is not a function
+[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m)[60G[1D[1G[0Jthe_database> db.todos.findById[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[59G[1D[1G[0Jthe_database> db.todos.findById([44m[32m'[49m694e97da5562ca53a889b03d'[39m)[58G[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m)[57G[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d[44m'[39m[49m)[33G[1D[1G[0Jthe_database> db.todos.findById([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[32G[1G[0Jthe_database> db.todos.findByI([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[31G[1G[0Jthe_database> db.todos.findBy([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[30G[1G[0Jthe_database> db.todos.findB([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[29G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m[44m)[49m[28G[28C[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m)[56G
+
+Uncaught 
+[1m[31mMongoInvalidArgumentError[0m: Query filter must be a plain object or ObjectId
+[1G[0Jthe_database> [15G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d'[39m)[56G[1D[1G[0Jthe_database> db.todos.find[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[55G[1D[1G[0Jthe_database> db.todos.find([44m[32m'[49m694e97da5562ca53a889b03d'[39m)[54G[1C[1G[0Jthe_database> db.todos.find[44m([49m[32m'694e97da5562ca53a889b03d'[39m)[55G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03d)[39m[54G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b03)[39m[53G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b0)[39m[52G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889b)[39m[51G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a889)[39m[50G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a88)[39m[49G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a8)[39m[48G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53a)[39m[47G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca53)[39m[46G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca5)[39m[45G[1G[0Jthe_database> db.todos.find([32m'694e97da5562ca)[39m[44G[1G[0Jthe_database> db.todos.find([32m'694e97da5562c)[39m[43G[1G[0Jthe_database> db.todos.find([32m'694e97da5562)[39m[42G[1G[0Jthe_database> db.todos.find([32m'694e97da556)[39m[41G[1G[0Jthe_database> db.todos.find([32m'694e97da55)[39m[40G[1G[0Jthe_database> db.todos.find([32m'694e97da5)[39m[39G[1G[0Jthe_database> db.todos.find([32m'694e97da)[39m[38G[1G[0Jthe_database> db.todos.find([32m'694e97d)[39m[37G[1G[0Jthe_database> db.todos.find([32m'694e97)[39m[36G[1G[0Jthe_database> db.todos.find([32m'694e9)[39m[35G[1G[0Jthe_database> db.todos.find([32m'694e)[39m[34G[1G[0Jthe_database> db.todos.find([32m'694)[39m[33G[1G[0Jthe_database> db.todos.find([32m'69)[39m[32G[1G[0Jthe_database> db.todos.find([32m'6)[39m[31G[1G[0Jthe_database> db.todos.find([32m')[39m[30G[1G[0Jthe_database> db.todos.find[44m([49m)[29G[1G[0Jthe_database> db.todos.find[44m([49m{)[30G[1G[0Jthe_database> db.todos.find[44m([49m{})[31G[1C[1G[0Jthe_database> db.todos.find({})[32G
+
 [
   {
     _id: ObjectId([32m'688a67c563d7e53ce889b03d'[39m),
@@ -150,20 +168,39 @@ Uncaught [1m[31mMongoInvalidArgumentError[0m: Query filter must be a plain o
     done: [33mfalse[39m
   }
 ]
-[1G[0Jthe_database> [15Geee[1G[0Jthe_database> ee[17G[1G[0Jthe_database> e[16G[1G[0Jthe_database> [15Gexit
-[?2004l[?2004hroot@c9e8f6c9e22d:/# [Kroot@c9e8f6c9e22d:/# sy  exit
-[?2004ltexit
+[1G[0Jthe_database> [15Geee[1G[0Jthe_database> ee[17G[1G[0Jthe_database> e[16G[1G[0Jthe_database> [15Gexit
+
+[?2004l[?2004hroot@c9e8f6c9e22d:/# 
+[K
+root@c9e8f6c9e22d:/# sy  exit
+[?2004l
+texit
 [?2004h]0;waren@yeni: ~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backendwaren@yeni:~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backend$ [7msudo rm /etc/apt/sources.list.d/mongodb-org*.list[27m
-[7msudo apt update[27m
-[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
-[K
-[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo rm /etc/apt/sources.list.d/mongodb-org*.list
-sudo apt update
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo rm /etc/apt/sources.list.d/mongodb-org*.list
-sudo a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[19Pcontainer ls -a[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K\[K[K[K[K[Kdockeer [K[K[Kr composer[K -f docker-compose.dev.yml v[K down --volume s
-[?2004l[1A[1B[0G[?25l[+] down 0/2
+
+[7msudo apt update[27m
+
+[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
+
+[K
+
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo rm /etc/apt/sources.list.d/mongodb-org*.list
+
+sudo apt update
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo rm /etc/apt/sources.list.d/mongodb-org*.list
+
+sudo a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8Pdocker exec -it todo-backend-mongo-1 bash
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[19Pcontainer ls -a
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K\[K[K[K[K[Kdockeer [K[K[Kr composer[K -f docker-compose.dev.yml v[K down --volume 
+s
+[?2004l
+[1A[1B[0G[?25l[+] down 0/2
  [33m⠋[0m Container todo-backend-redis-1 Stopping                            [34m0.1s [0m
  [33m⠋[0m Container todo-backend-mongo-1 Stopping                            [34m0.1s [0m
 [?25h[1A[1A[1A[0G[?25l[+] down 0/2
@@ -2154,7 +2191,8 @@ Uncaught [1m[31mMongoInvalidArgumentError[0m: Query filter must be a plain o
  [32m✔[0m Container todo-backend-mongo-1 [32mRemoved[0m                            [34m62.3s [0m
  [33m⠼[0m Network todo-backend_default   Removing                            [34m2.5s [0m
 [?25h[?2004h]0;waren@yeni: ~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backendwaren@yeni:~/Documents/fullStackOpen2023/part12-containers-applications/todo-app/todo-backend$ sd[K[Kdos[Kcker compose -f docker-compose.dev.yml  up
-[?2004l[1A[1B[0G[?25l[+] up 0/1
+[?2004l
+[1A[1B[0G[?25l[+] up 0/1
  [33m⠋[0m Network todo-backend_default Creating                              [34m0.1s [0m
 [?25h[1A[1A[0G[?25l[+] up 0/1
  [33m⠙[0m Network todo-backend_default Creating                              [34m0.2s [0m

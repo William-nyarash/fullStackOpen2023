@@ -237,7 +237,7 @@ npm test
 - [x] Part 7 – Routing & Custom Hooks
 - [ ] Part 8 – GraphQL
 - [x] Part 9 – TypeScript
-- [ ] Part 11 – CI/CD
+- [x] Part 11 – CI/CD
 - [ ] Part 12 - Containers
 
 
